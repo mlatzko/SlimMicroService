@@ -5,4 +5,4 @@ The goal of this micro service is to provide a minimum viable service which perf
 composer require mlatzko/SlimMicroService
 ```
 ## Special Thanks
-The Jan and Andreas from http://aero-code.com/. See also their repositories: https://github.com/PiMastah, https://github.com/amandiel
+To Jan and Andreas from http://aero-code.com/. See also their repositories: https://github.com/PiMastah, https://github.com/amandiel
