@@ -1,0 +1,75 @@
+<project name="SlimMicroService" default="build">
+
+    <!-- target compositions -->
+    <target name="build"
+        depends="prepare,lint,phpdoc,phpunit"/>
+
+    <target name="jenkins"
+        depends="prepare,lint,phpcs,phpcpd,phpdoc,phpunit"/>
+
+    <!-- single targets -->
+    <target name="clean" description="Cleaning up build directory">
+        <delete dir="${basedir}/coverage"/>
+        <delete dir="${basedir}/docs"/>
+        <delete dir="${basedir}/reports"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare build directory">
+        <mkdir dir="${basedir}/coverage"/>
+        <mkdir dir="${basedir}/docs"/>
+        <mkdir dir="${basedir}/reports"/>
+    </target>
+
+    <!-- Syntax Error Check -->
+    <target name="lint" description="Check for PHP syntax errors with PHP files.">
+        <apply executable="php" failonerror="true">
+            <arg value="-l" />
+
+            <fileset dir="${basedir}/../app">
+                <include name="**/*.php" />
+                <modified />
+            </fileset>
+
+            <fileset dir="${basedir}/../tests">
+                <include name="**/*.php" />
+                <modified />
+            </fileset>
+
+            <fileset dir="${basedir}/../public">
+                <include name="**/*.php" />
+                <modified />
+            </fileset>
+        </apply>
+    </target>
+
+    <!-- PHP CodeSniffer -->
+    <target name="phpcs" description="PHP_CodeSniffer tokenizes PHP, JavaScript and CSS files and detects violations of a defined set of coding standards.">
+        <exec executable="phpcs">
+            <arg value="--standard=${basedir}/phpcs.xml" />
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${basedir}/reports/phpcs.xml" />
+            <arg value="--ignore=bootstrap,config" />
+            <arg path="${basedir}/../app" />
+        </exec>
+    </target>
+
+    <!-- Copy/Paste Detector (CPD) for PHP code -->
+    <target name="phpcpd" description="Copy/Paste Detector (CPD) for PHP code">
+        <exec executable="phpcpd">
+            <arg value="--exclude=bootstrap,config" />
+            <arg value="--log-pmd" />
+            <arg value="${basedir}/reports/phpcpd.xml" />
+            <arg value="${basedir}/../app" />
+        </exec>
+    </target>
+
+    <!-- API Documentation -->
+    <target name="phpdoc" description="Create documentation using PHPDocumentor">
+        <exec executable="phpdoc" />
+    </target>
+
+    <!-- PHP Unit Tests -->
+    <target name="phpunit" description="Executing PHP unit tests.">
+        <exec executable="phpunit" failonerror="true" />
+    </target>
+</project>

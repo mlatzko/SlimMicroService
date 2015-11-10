@@ -1,0 +1,5 @@
+resources:
+    example:
+        adapter: doctrine/dbal
+        config:
+            table: example
