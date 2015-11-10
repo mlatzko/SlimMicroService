@@ -13,4 +13,4 @@ composer require mlatzko/SlimMicroService
 ./run.sh
 ```
 ## Special Thanks
-Jan and Andreas from http://aero-code.com/. See also their repositories: https://github.com/PiMastah, https://github.com/amandiel
+Jan and Andreas from http://aero-code.com/. See also their repositories https://github.com/PiMastah and https://github.com/amandiel.
