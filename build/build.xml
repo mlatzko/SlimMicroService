@@ -2,10 +2,10 @@
 
     <!-- target compositions -->
     <target name="build"
-        depends="prepare,lint,phpdoc,phpunit"/>
+        depends="prepare,composer,lint,phpdoc,phpunit"/>
 
     <target name="jenkins"
-        depends="prepare,lint,phpcs,phpcpd,phpdoc,phpunit"/>
+        depends="prepare,composer,lint,phpcs,phpcpd,phpdoc,phpunit"/>
 
     <!-- single targets -->
     <target name="clean" description="Cleaning up build directory">
@@ -18,6 +18,15 @@
         <mkdir dir="${basedir}/coverage"/>
         <mkdir dir="${basedir}/docs"/>
         <mkdir dir="${basedir}/reports"/>
+    </target>
+
+    <target name="composer" description="Installing composer dependencies">
+        <exec executable="composer" failonerror="true">
+            <arg value="install" />
+            <arg value="--prefer-dist" />
+            <arg value="--no-progress" />
+            <arg value="--working-dir=${basedir}/../" />
+        </exec>
     </target>
 
     <!-- Syntax Error Check -->
