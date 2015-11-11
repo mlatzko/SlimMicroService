@@ -23,13 +23,16 @@ class ReadAction extends AbstractAction
         $responseData = array(
             'status' => 'ok',
             'content' => array(
-                'method'    => $request->getMethod(),
-                'arguments' => $args,
+                'uri'       => '/example/' . $args['identifier'],
+                'firstname' => 'John',
+                'lastname'  => 'Smith',
+                'email'     => 'john.smith@example.com',
+                'created'   => '2015-11-10T12:00:00Z+00:00',
+                'modified'  => '2015-11-10T14:00:00Z+00:00'
             ),
         );
 
-        $this->logger->info('Resource requested.', $args);
-
-        return $response->withJson($responseData, 200);
+        return $response
+            ->withJson($responseData, 200);
     }
 }

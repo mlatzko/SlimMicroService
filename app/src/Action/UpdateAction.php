@@ -20,18 +20,10 @@ class UpdateAction extends AbstractAction
      */
     public function dispatch($request, $response, $args)
     {
-        $responseData = array(
-            'status' => 'ok',
-            'content' => array(
-                'method'    => $request->getMethod(),
-                'arguments' => $args,
-            ),
-        );
-
         $requestData = (NULL !== $request->getParsedBody()) ? $request->getParsedBody() : array() ;
 
-        $this->logger->info('Resource updated.', array_merge($args, $requestData));
-
-        return $response->withJson($responseData, 200);
+        return $response
+            ->withStatus(204)
+            ->withHeader('Content-Type', 'application/json;charset=utf-8');
     }
 }

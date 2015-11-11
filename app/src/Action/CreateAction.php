@@ -22,16 +22,12 @@ class CreateAction extends AbstractAction
     {
         $responseData = array(
             'status' => 'ok',
-            'content' => array(
-                'method'    => $request->getMethod(),
-                'arguments' => $args,
-            ),
+            'content' => '/example/AAAAAAAAAAAAAAAAAA',
         );
 
         $requestData = (NULL !== $request->getParsedBody()) ? $request->getParsedBody() : array() ;
 
-        $this->logger->info('Resource created.', array_merge($args, $requestData));
-
-        return $response->withJson($responseData, 200);
+        return $response
+            ->withJson($responseData, 201);
     }
 }

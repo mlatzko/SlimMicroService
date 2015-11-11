@@ -7,7 +7,9 @@
  * @license   https://opensource.org/licenses/MIT
  */
 
-
+/**
+ * Settings for Slim/App.
+ */
 return array(
     'settings' => array(
         'determineRouteBeforeAppMiddleware' => TRUE,

@@ -20,16 +20,8 @@ class DeleteAction extends AbstractAction
      */
     public function dispatch($request, $response, $args)
     {
-        $responseData = array(
-            'status' => 'ok',
-            'content' => array(
-                'method'    => $request->getMethod(),
-                'arguments' => $args,
-            ),
-        );
-
-        $this->logger->info('Resource deleted.', $args);
-
-        return $response->withJson($responseData, 200);
+        return $response
+            ->withStatus(204)
+            ->withHeader('Content-Type', 'application/json;charset=utf-8');
     }
 }

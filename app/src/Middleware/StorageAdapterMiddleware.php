@@ -49,7 +49,6 @@ class StorageAdapterMiddleware
      */
     public function __construct(Config $config, RegistryInterface $registry)
     {
-        $this->logger   = $logger;
         $this->config   = $config;
         $this->registry = $registry;
     }

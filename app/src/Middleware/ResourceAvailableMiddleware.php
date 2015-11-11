@@ -37,7 +37,7 @@ class ResourceAvailableMiddleware
      */
     public function __construct(Config $config)
     {
-        $this->config   = $config;
+        $this->config = $config;
     }
 
     /**
