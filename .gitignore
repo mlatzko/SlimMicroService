@@ -1,21 +1,8 @@
-/build/coverage/
-/build/docs/
-/build/reports/
-
+/build/*/
 /build/cache.properties
+!/build/.gitkeep
 
-/vendor/composer/
-/vendor/container-interop/
-/vendor/nikic/
-/vendor/hassankhan/
-/vendor/monolog/
-/vendor/pimple/
-/vendor/psr/
-/vendor/slim/
-/vendor/symfony/
-/vendor/autoload.php
+/vendor/
+!/vendor/.gitkeep
 
 /composer.lock
-
-!/build/.gitkeep
-!/vendor/.gitkeep
