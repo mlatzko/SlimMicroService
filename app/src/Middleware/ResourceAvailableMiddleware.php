@@ -52,15 +52,36 @@ class ResourceAvailableMiddleware
     public function __invoke($request, $response, $next)
     {
         $resources = $this->config->get('resources');
-        $args      = $request->getAttributes()['route']->getArguments();
+        $args      = $this->getRouteArguments($request);
 
-        if(false === isset($resources[$args['resource']])) {
-            $responseData = array('status' => 'error', 'message' => 'Not found');
-            return $response->withJson($responseData, 404);
+        if(FALSE === empty($args)){
+            if(TRUE === isset($resources[$args['resource']])){
+                $response = $next($request, $response);
+                return $response;
+            }
         }
 
-        $response = $next($request, $response);
+        $responseData = array('status' => 'error', 'message' => 'Not found');
+        return $response->withJson($responseData, 404);
+    }
 
-        return $response;
+    /**
+     * Get route arguments form request object.
+     *
+     * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
+     *
+     * @return array
+     */
+    private function getRouteArguments($request)
+    {
+        $args = array();
+
+        $attributes = $request->getAttributes();
+
+        if(TRUE === isset($attributes['route'])){
+            $args = $attributes['route']->getArguments();
+        }
+
+        return $args;
     }
 }
