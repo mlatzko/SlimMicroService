@@ -11,7 +11,14 @@ The goal of this micro service is to provide a minimum viable service which perf
 composer require mlatzko/SlimMicroService
 ```
 
+## Set up the service on localhost:8080
+This will create the entity classes required to access the database.
+```
+./setup.sh
+```
+
 ## Run the service on localhost:8080
+This will use the PHP built-in server to launch a server.
 ```
 ./run.sh
 ```
