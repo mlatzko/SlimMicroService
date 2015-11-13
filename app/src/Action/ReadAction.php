@@ -20,15 +20,25 @@ class ReadAction extends AbstractAction
      */
     public function dispatch($request, $response, $args)
     {
+        $namespace   = $this->config->get('entitiesConfiguration.namespace');
+        $entityClass = $namespace . $this->config->get('entities.' . $args['resource'] . '.classname');
+
+        $resource = $this->doctrine->find($entityClass, $args['id']);
+
+        if(NULL === $resource){
+            $responseData = array('status' => 'error', 'message' => 'Not found');
+            return $response->withJson($responseData, 404);
+        }
+
+        // @todo - add transform optimusprime to have an array instead of entity class object
+
         $responseData = array(
             'status' => 'ok',
             'content' => array(
-                'uri'       => '/example/' . $args['identifier'],
-                'firstname' => 'John',
-                'lastname'  => 'Smith',
-                'email'     => 'john.smith@example.com',
-                'created'   => '2015-11-10T12:00:00Z+00:00',
-                'modified'  => '2015-11-10T14:00:00Z+00:00'
+                'uri' => '/example/' . $resource->getId(),
+                'name' => $resource->getName(),
+                'email' => $resource->getEmail(),
+                'modified' => $resource->getModified(),
             ),
         );
 

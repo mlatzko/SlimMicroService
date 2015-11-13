@@ -57,6 +57,12 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
+$container['doctrine'] = function($container) {
+        $config = $container->get('config')->get('database');
+
+        return \App\Doctrine\DoctrineBuilder::build($config);
+};
+
 $container['registry'] = function ($c) {
     $registry = new App\Registry\RegistryDefault;
 
@@ -79,7 +85,7 @@ $container['App\Action\ReadAction'] = function ($c) {
     return new App\Action\ReadAction(
         $c->get('config'),
         $c->get('logger'),
-        $c->get('registry')
+        $c->get('doctrine')
     );
 };
 

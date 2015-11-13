@@ -1,0 +1,7 @@
+database:
+    driver: pdo_mysql
+    host: 127.0.0.1
+    dbname: slim_micro_service
+    user: root
+    password: password
+    charset: utf8

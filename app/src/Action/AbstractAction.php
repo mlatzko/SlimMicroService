@@ -45,7 +45,7 @@ abstract class AbstractAction
      *
      * @var \App\Registry\RegistryInterface $registry
      */
-    protected $registry;
+    protected $doctrine;
 
     /**
      * Constructor
@@ -54,11 +54,11 @@ abstract class AbstractAction
      * @param \Psr\Log\LoggerInterface        $logger
      * @param \App\Registry\RegistryInterface $registry
      */
-    public function __construct(Config $config, LoggerInterface $logger, RegistryInterface $registry)
+    public function __construct(Config $config, LoggerInterface $logger, $doctrine)
     {
         $this->logger   = $logger;
         $this->config   = $config;
-        $this->registry = $registry;
+        $this->doctrine = $doctrine;
     }
 
     /**

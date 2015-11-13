@@ -1,0 +1,14 @@
+entitiesConfiguration:
+    namespace: App\Doctrine\Entity\
+    entityPath: app/src/Doctrine/Entity
+
+entities:
+    example:
+        route: example
+        table: example
+        classname: Example
+
+resources:
+    example:
+        table: example
+        classname: Example

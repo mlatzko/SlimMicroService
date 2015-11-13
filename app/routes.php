@@ -8,8 +8,8 @@
  */
 $app->post('/{resource}', 'App\Action\CreateAction:dispatch');
 
-$app->get('/{resource}/{identifier}', 'App\Action\ReadAction:dispatch');
+$app->get('/{resource}/{id}', 'App\Action\ReadAction:dispatch');
 
-$app->patch('/{resource}/{identifier}', 'App\Action\UpdateAction:dispatch');
+$app->patch('/{resource}/{id}', 'App\Action\UpdateAction:dispatch');
 
-$app->delete('/{resource}/{identifier}', 'App\Action\DeleteAction:dispatch');
+$app->delete('/{resource}/{id}', 'App\Action\DeleteAction:dispatch');
