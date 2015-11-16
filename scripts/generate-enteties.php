@@ -68,11 +68,11 @@ foreach ($entities as $key => $entity) {
     $namespace = $config->get('entitiesConfiguration.namespace');
     $classname = $namespace . $config->get('entities.' . $key . '.classname');
 
-    // set up class
+    // Generate file content via Doctrine.
     $metadata = $factory->getMetadataFor($classname);
     $content  = $generator->generateEntityClass($metadata);
 
-    // write file into export path
+    // Write entity class in to target folder.
     file_put_contents($filename, $content);
 
     $logger->debug('Entity class "' . $classname .'" generated into folder "' . $path . '.');

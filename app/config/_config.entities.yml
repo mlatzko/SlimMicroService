@@ -4,11 +4,5 @@ entitiesConfiguration:
 
 entities:
     example:
-        route: example
-        table: example
-        classname: Example
-
-resources:
-    example:
         table: example
         classname: Example

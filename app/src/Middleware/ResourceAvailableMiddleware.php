@@ -51,11 +51,12 @@ class ResourceAvailableMiddleware
      */
     public function __invoke($request, $response, $next)
     {
-        $resources = $this->config->get('resources');
-        $args      = $this->getRouteArguments($request);
+        $args = $this->getRouteArguments($request);
 
         if(FALSE === empty($args)){
-            if(TRUE === isset($resources[$args['resource']])){
+            $entity = $this->config->get('entities.' . $args['resource']);
+
+            if(NULL !== $entity){
                 $response = $next($request, $response);
                 return $response;
             }

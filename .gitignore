@@ -2,8 +2,8 @@
 /build/cache.properties
 !/build/.gitkeep
 
-/src/Doctrine/Entity/
-!/src/Doctrine/Entity/.gitkeep
+/app/src/Doctrine/Entity/
+!/app/src/Doctrine/Entity/.gitkeep
 
 /vendor/
 !/vendor/.gitkeep
