@@ -6,3 +6,11 @@ entities:
     example:
         table: example
         classname: Example
+
+    user:
+        table: user
+        classname: User
+
+    account:
+        table: account
+        classname: Account

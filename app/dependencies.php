@@ -60,13 +60,9 @@ $container['logger'] = function ($c) {
 $container['doctrine'] = function($container) {
         $config = $container->get('config')->get('database');
 
-        return \App\Doctrine\DoctrineBuilder::build($config);
-};
+        $entityManager = \App\Doctrine\DoctrineBuilder::build($config);
 
-$container['registry'] = function ($c) {
-    $registry = new App\Registry\RegistryDefault;
-
-    return $registry;
+        return $entityManager;
 };
 
 // -----------------------------------------------------------------------------
@@ -77,7 +73,7 @@ $container['App\Action\CreateAction'] = function ($c) {
     return new App\Action\CreateAction(
         $c->get('config'),
         $c->get('logger'),
-        $c->get('registry')
+        $c->get('doctrine')
     );
 };
 
@@ -93,7 +89,7 @@ $container['App\Action\UpdateAction'] = function ($c) {
     return new App\Action\UpdateAction(
         $c->get('config'),
         $c->get('logger'),
-        $c->get('registry')
+        $c->get('doctrine')
     );
 };
 
@@ -101,6 +97,6 @@ $container['App\Action\DeleteAction'] = function ($c) {
     return new App\Action\DeleteAction(
         $c->get('config'),
         $c->get('logger'),
-        $c->get('registry')
+        $c->get('doctrine')
     );
 };

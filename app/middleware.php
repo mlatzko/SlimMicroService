@@ -10,8 +10,7 @@
 // Last In First Out call stack by default by Slim.
 $app->add(
     new App\Middleware\StorageAdapterMiddleware(
-        $app->getContainer()->get('config'),
-        $app->getContainer()->get('registry')
+        $app->getContainer()->get('config')
     )
 );
 

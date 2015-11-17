@@ -33,24 +33,15 @@ class StorageAdapterMiddleware
      */
     protected $config;
 
-
-    /**
-     * Contains a simple registry implementation.
-     *
-     * @var \App\Registry\RegistryInterface $registry
-     */
-    protected $registry;
-
     /**
      * Constructor
      *
      * @param \Noodlehaus\Config              $config
      * @param \App\Registry\RegistryInterface $registry
      */
-    public function __construct(Config $config, RegistryInterface $registry)
+    public function __construct(Config $config)
     {
-        $this->config   = $config;
-        $this->registry = $registry;
+        $this->config = $config;
     }
 
     /**

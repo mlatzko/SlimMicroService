@@ -70,6 +70,8 @@ foreach ($entities as $key => $entity) {
 
     // Generate file content via Doctrine.
     $metadata = $factory->getMetadataFor($classname);
+    $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
+
     $content  = $generator->generateEntityClass($metadata);
 
     // Write entity class in to target folder.
