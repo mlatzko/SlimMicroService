@@ -63,8 +63,6 @@ $generator->setUpdateEntityIfExists(true);
 $generator->setBackupExisting(false);
 $generator->setFieldVisibility('protected');
 
-var_dump($generator);
-
 $logger->debug('EntityGenerator initialized.');
 
 ### GENERATE ENTITY CLASSES ONLY FOR DEFINED RESOURCES
