@@ -39,6 +39,11 @@ $entityManager = EntityManager::create(
     Setup::createAnnotationMetadataConfiguration($exportPaths, TRUE)
 );
 
+### MAP CUSTOM MYSQL FIELDTYPES
+$platform = $entityManager->getConnection()->getDatabasePlatform();
+$platform->registerDoctrineTypeMapping('enum', 'string');
+$platform->registerDoctrineTypeMapping('bit', 'boolean');
+
 $driver = new DatabaseDriver($entityManager->getConnection()->getSchemaManager());
 $driver->setNamespace($config->get('entitiesConfiguration.namespace'));
 
