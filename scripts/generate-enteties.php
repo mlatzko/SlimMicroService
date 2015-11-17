@@ -61,6 +61,9 @@ $generator->setGenerateStubMethods(true);
 $generator->setRegenerateEntityIfExists(true);
 $generator->setUpdateEntityIfExists(true);
 $generator->setBackupExisting(false);
+$generator->setFieldVisibility('protected');
+
+var_dump($generator);
 
 $logger->debug('EntityGenerator initialized.');
 
