@@ -31,12 +31,17 @@ $config = Config::load(__DIR__ . DIRECTORY_SEPARATOR . '/../app/config');
 
 $logger->debug('Config initialized');
 
-### SET UP DOCTRINE ENTITY MANAGER
-$exportPaths = array(__DIR__ . DIRECTORY_SEPARATOR . 'Entity');
+### SET UP STANDARD VARIABLES
+$pathname  = __DIR__ . '/../' . $config->get('entitiesConfiguration.entityPath');
+$pathnames = array($pathname);
+$namespace = $config->get('entitiesConfiguration.namespace');
+$entities  = $config->get('entities');
 
+
+### SET UP DOCTRINE ENTITY MANAGER
 $entityManager = EntityManager::create(
     $config->get('database'),
-    Setup::createAnnotationMetadataConfiguration($exportPaths, TRUE)
+    Setup::createAnnotationMetadataConfiguration($pathnames, TRUE)
 );
 
 ### MAP CUSTOM MYSQL FIELDTYPES
@@ -45,7 +50,7 @@ $platform->registerDoctrineTypeMapping('enum', 'string');
 $platform->registerDoctrineTypeMapping('bit', 'boolean');
 
 $driver = new DatabaseDriver($entityManager->getConnection()->getSchemaManager());
-$driver->setNamespace($config->get('entitiesConfiguration.namespace'));
+$driver->setNamespace($namespace);
 
 $entityManager->getConfiguration()->setMetadataDriverImpl($driver);
 
@@ -66,12 +71,10 @@ $generator->setFieldVisibility('protected');
 $logger->debug('EntityGenerator initialized.');
 
 ### GENERATE ENTITY CLASSES ONLY FOR DEFINED RESOURCES
-$entities = $config->get('entities');
+
 
 foreach ($entities as $key => $entity) {
-    $path      = __DIR__ . '/../' . $config->get('entitiesConfiguration.entityPath');
-    $filename  = $path . DIRECTORY_SEPARATOR . $config->get('entities.' . $key . '.classname') . '.php';
-    $namespace = $config->get('entitiesConfiguration.namespace');
+    $filename  = $pathname . DIRECTORY_SEPARATOR . $config->get('entities.' . $key . '.classname') . '.php';
     $classname = $namespace . $config->get('entities.' . $key . '.classname');
 
     // Generate file content via Doctrine.
@@ -83,7 +86,7 @@ foreach ($entities as $key => $entity) {
     // Write entity class in to target folder.
     file_put_contents($filename, $content);
 
-    $logger->debug('Entity class "' . $classname .'" generated into folder "' . $path . '.');
+    $logger->debug('Entity class "' . $classname .'" generated into folder "' . $pathname . '.');
 }
 
 $logger->info('done');

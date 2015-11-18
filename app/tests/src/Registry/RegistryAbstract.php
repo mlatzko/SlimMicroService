@@ -4,7 +4,7 @@ class TestRegistryAbstract extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->abstract = $this->getMockForAbstractClass('App\Registry\RegistryAbstract');
+        $this->class = new \SlimMicroService\Registry\RegistryDefault;
     }
 
     public function providerTestMethodThrowsExceptionOnInvalidKey()
@@ -41,7 +41,7 @@ class TestRegistryAbstract extends PHPUnit_Framework_TestCase
      */
     public function testMethodSetThrowsExceptionOnInvalidKey($key)
     {
-        $this->abstract->set($key, 'ExampleValue');
+        $this->class->set($key, 'ExampleValue');
     }
 
     /**
@@ -50,7 +50,7 @@ class TestRegistryAbstract extends PHPUnit_Framework_TestCase
      */
     public function testMethodGetThrowsExceptionOnInvalidKey($key)
     {
-        $this->abstract->get($key);
+        $this->class->get($key);
     }
 
     /**
@@ -58,7 +58,7 @@ class TestRegistryAbstract extends PHPUnit_Framework_TestCase
      */
     public function testMethodSetThrowsExceptionOnInvalidValue()
     {
-        $this->abstract->set('ExampleKey', NULL);
+        $this->class->set('ExampleKey', NULL);
     }
 
 
@@ -78,16 +78,16 @@ class TestRegistryAbstract extends PHPUnit_Framework_TestCase
      */
     public function testMethodGetBehavior($key, $value)
     {
-        $this->abstract->set($key, $value);
+        $this->class->set($key, $value);
 
-        $result = $this->abstract->get($key);
+        $result = $this->class->get($key);
 
         $this->assertEquals($result, $value);
     }
 
     public function testMethodGetBehaviorWithNonExistingKey()
     {
-        $result = $this->abstract->get('KeyDoesNotExist');
+        $result = $this->class->get('KeyDoesNotExist');
 
         $this->assertEquals($result, NULL, 'Expect method "get" returns NULL if given key is not registered!');
     }
@@ -97,10 +97,10 @@ class TestRegistryAbstract extends PHPUnit_Framework_TestCase
      */
     public function testMethodDeleteBehavior($key, $value)
     {
-        $this->abstract->set($key, $value);
-        $this->abstract->delete($key);
+        $this->class->set($key, $value);
+        $this->class->delete($key);
 
-        $result = $this->abstract->get($key);
+        $result = $this->class->get($key);
 
         $this->assertEquals($result, NULL, 'Expect method "get" returns NULL after registered key was deleted!');
     }

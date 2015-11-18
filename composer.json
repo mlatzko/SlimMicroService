@@ -7,13 +7,14 @@
     "authors": [
         {
             "name": "Mathias Latzko",
-            "email": "mathias.latzko@googlemail.com",
+            "email": "mathias.latzko@gmail.com",
             "homepage": "http://mlatzko.github.io/"
         }
     ],
     "autoload": {
         "psr-4": {
             "App\\": "app/src",
+            "SlimMicroService\\": "app/src",
             "Noodlehaus\\": "vendor/hassankhan/config/src"
         }
     },

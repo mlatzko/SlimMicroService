@@ -14,4 +14,4 @@ sudo composer install
 
 cd public
 
-sudo php -S 0.0.0.0:81
+sudo php -S 0.0.0.0:80

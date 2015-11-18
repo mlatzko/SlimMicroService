@@ -6,10 +6,7 @@
  * @copyright Copyright (c) 2015 Mathias Latzko
  * @license   https://opensource.org/licenses/MIT
  */
-namespace App\Middleware;
-
-use Noodlehaus\Config;
-use App\Registry\RegistryInterface;
+namespace SlimMicroService\Middleware;
 
 /**
  * Checking if the resource request is configured in the configuration. If not
@@ -19,27 +16,8 @@ use App\Registry\RegistryInterface;
  *
  * @version 0.1 In development.
  */
-class ResourceAvailableMiddleware
+class ResourceIsSupportedMiddleware extends AbstractMiddleware
 {
-    /**
-     * Contains an object of the lightweight Noodlehaus config class.
-     *
-     * @var \Noodlehaus\Config $config
-     *
-     * @link https://github.com/hassankhan/config
-     */
-    protected $config;
-
-    /**
-     * Constructor
-     *
-     * @param \Noodlehaus\Config $config
-     */
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-    }
-
     /**
      * Example middleware invokable class
      *
@@ -62,7 +40,7 @@ class ResourceAvailableMiddleware
             }
         }
 
-        $responseData = array('status' => 'error', 'message' => 'Not found');
+        $responseData = array('status' => 'error', 'content' => 'Not found!');
         return $response->withJson($responseData, 404);
     }
 
@@ -75,14 +53,12 @@ class ResourceAvailableMiddleware
      */
     private function getRouteArguments($request)
     {
-        $args = array();
-
         $attributes = $request->getAttributes();
 
-        if(TRUE === isset($attributes['route'])){
-            $args = $attributes['route']->getArguments();
+        if(FALSE === isset($attributes['route'])){
+            return array();
         }
 
-        return $args;
+        return $attributes['route']->getArguments();;
     }
 }

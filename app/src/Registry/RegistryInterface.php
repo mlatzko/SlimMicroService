@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2015 Mathias Latzko
  * @license   https://opensource.org/licenses/MIT
  */
-namespace App\Registry;
+namespace SlimMicroService\Registry;
 
 /**
  * To implemented to standardize registry handling.

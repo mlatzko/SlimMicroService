@@ -1,16 +1,12 @@
 entitiesConfiguration:
-    namespace: App\Doctrine\Entity\
-    entityPath: app/src/Doctrine/Entity
+    namespace: SlimMicroService\Entity\
+    entityPath: app/src/Entity
+    actionsSupported:
+        create: read: \SlimMicroService\Action\ActionCreate
+        read: \SlimMicroService\Action\ActionRead
 
 entities:
     example:
+        adapter: doctrine
         table: example
         classname: Example
-
-    user:
-        table: user
-        classname: User
-
-    account:
-        table: account
-        classname: Account

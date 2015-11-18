@@ -14,6 +14,9 @@ $settings = require  __DIR__ . '/../app/settings.php';
 
 $app = new \Slim\App($settings);
 
+// set up overwrites
+require __DIR__ . '/../app/overwrites.php';
+
 // set up dependencies
 require __DIR__ . '/../app/dependencies.php';
 

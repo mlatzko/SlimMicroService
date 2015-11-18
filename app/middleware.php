@@ -9,13 +9,25 @@
 
 // Last In First Out call stack by default by Slim.
 $app->add(
-    new App\Middleware\StorageAdapterMiddleware(
-        $app->getContainer()->get('config')
+    new SlimMicroService\Middleware\ActionAdapterBuilderMiddleware(
+        $app->getContainer()->get('config'),
+        $app->getContainer()->get('logger'),
+        $app->getContainer()
     )
 );
 
 $app->add(
-    new App\Middleware\ResourceAvailableMiddleware(
-        $app->getContainer()->get('config')
+    new SlimMicroService\Middleware\ActionBuilderMiddleware(
+        $app->getContainer()->get('config'),
+        $app->getContainer()->get('logger'),
+        $app->getContainer()
+    )
+);
+
+$app->add(
+    new SlimMicroService\Middleware\ResourceIsSupportedMiddleware(
+        $app->getContainer()->get('config'),
+        $app->getContainer()->get('logger'),
+        $app->getContainer()
     )
 );

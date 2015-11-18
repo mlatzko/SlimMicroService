@@ -6,11 +6,7 @@
  * @copyright Copyright (c) 2015 Mathias Latzko
  * @license   https://opensource.org/licenses/MIT
  */
-namespace App\Action;
-
-use Noodlehaus\Config;
-use Psr\Log\LoggerInterface;
-use App\Registry\RegistryInterface;
+namespace SlimMicroService\Action;
 
 /**
  * This class contains the default behaviors required for all
@@ -20,7 +16,7 @@ use App\Registry\RegistryInterface;
  *
  * @version 0.1 In development.
  */
-abstract class AbstractAction
+abstract class ActionAbstract
 {
     /**
      * Contains an object of the lightweight Noodlehaus config class.
@@ -45,7 +41,7 @@ abstract class AbstractAction
      *
      * @var \App\Registry\RegistryInterface $registry
      */
-    protected $doctrine;
+    protected $adapter;
 
     /**
      * Constructor
@@ -54,11 +50,34 @@ abstract class AbstractAction
      * @param \Psr\Log\LoggerInterface        $logger
      * @param \App\Registry\RegistryInterface $registry
      */
-    public function __construct(Config $config, LoggerInterface $logger, $doctrine)
+    public function __construct($config = NULL, $logger = NULL, $adapter = NULL)
     {
-        $this->logger   = $logger;
-        $this->config   = $config;
-        $this->doctrine = $doctrine;
+        if(NULL !== $config){
+            $this->setConfig($config);
+        }
+
+        if(NULL !== $logger){
+            $this->setLogger($logger);
+        }
+
+        if(NULL !== $adapter){
+            $this->setAdapter($adapter);
+        }
+    }
+
+    public function setConfig(\Noodlehaus\Config $config)
+    {
+        $this->config = $config;
+    }
+
+    public function setLogger(\Psr\Log\LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    public function setAdapter(\SlimMicroService\Adapter\AdapterInterface $adapter)
+    {
+        $this->adapter = $adapter;
     }
 
     /**
