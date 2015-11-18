@@ -39,11 +39,6 @@
                 <modified />
             </fileset>
 
-            <fileset dir="${basedir}/../tests">
-                <include name="**/*.php" />
-                <modified />
-            </fileset>
-
             <fileset dir="${basedir}/../public">
                 <include name="**/*.php" />
                 <modified />
@@ -57,7 +52,7 @@
             <arg value="--standard=${basedir}/phpcs.xml" />
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/reports/phpcs.xml" />
-            <arg value="--ignore=bootstrap,config" />
+            <arg value="--ignore=bootstrap,config,tests" />
             <arg path="${basedir}/../app" />
         </exec>
     </target>
@@ -65,7 +60,7 @@
     <!-- Copy/Paste Detector (CPD) for PHP code -->
     <target name="phpcpd" description="Copy/Paste Detector (CPD) for PHP code">
         <exec executable="phpcpd">
-            <arg value="--exclude=bootstrap,config" />
+            <arg value="--exclude=bootstrap,config,tests" />
             <arg value="--log-pmd" />
             <arg value="${basedir}/reports/phpcpd.xml" />
             <arg value="${basedir}/../app" />

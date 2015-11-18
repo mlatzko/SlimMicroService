@@ -60,8 +60,6 @@ class ValidatorSchema extends ValidatorDefault
         }
     }
 
-    private function registerRules($fieldName, $fieldValue)
-
     private function validateNullable($fieldName, $value)
     {
 
