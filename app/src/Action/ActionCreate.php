@@ -35,6 +35,8 @@ class ActionCreate extends ActionAbstract
                 ->withJson($responseData, 400);
         }
 
+        // @todo - add validation
+
         $resource = $this->adapter->create($args['resource'], $requestData);
 
         // set response data
