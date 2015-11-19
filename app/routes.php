@@ -7,4 +7,6 @@
  * @license   https://opensource.org/licenses/MIT
  */
 
+$app->post('/{resource}', '\SlimMicroService\Action\ActionCreate:dispatch');
+
 $app->get('/{resource}/{id}', '\SlimMicroService\Action\ActionRead:dispatch');

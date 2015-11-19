@@ -73,6 +73,42 @@ class AdapterDoctrine
     }
 
     /**
+     * Create resource.
+     */
+    public function create($routeName, array $requestData)
+    {
+        $entity = new $this->classname;
+
+        foreach ($requestData as $key => $value) {
+            $methodName = 'set' . ucfirst($key);
+
+            if(FALSE === method_exists($entity, $methodName)){
+                continue;
+            }
+
+            $entity->$methodName($value);
+        }
+
+        $fields = $this->entityManager->getClassMetadata(get_class($entity))->fieldMappings;
+
+        foreach ($fields as $key => $value) {
+            $setMethodName = 'set' . ucfirst($key);
+            $getMethodName = 'get' . ucfirst($key);
+
+            if('datetime' === $value['type']){
+                $entity->$setMethodName(
+                    new \DateTime($entity->$getMethodName())
+                );
+            }
+        }
+
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+
+        return (NULL === $entity) ? array() : $this->entityToArray($routeName, $entity) ;
+    }
+
+    /**
      * Read resource.
      */
     public function read($routeName, $identifier)

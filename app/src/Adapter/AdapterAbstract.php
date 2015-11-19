@@ -24,7 +24,7 @@ abstract class AdapterAbstract
     /**
      * Create resource.
      */
-    public function create($routeName, array $data){
+    public function create($routeName, array $requestData){
         throw new \RuntimeException('Method create not implement on adapter.');
     }
 
@@ -38,7 +38,7 @@ abstract class AdapterAbstract
     /**
      * Update resource.
      */
-    public function update($routeName, $identifier, array $data){
+    public function update($routeName, $identifier, array $requestData){
         throw new \RuntimeException('Method create not implement on adapter.');
     }
 

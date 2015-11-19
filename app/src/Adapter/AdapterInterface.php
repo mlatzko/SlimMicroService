@@ -23,11 +23,11 @@ interface AdapterInterface
      * Create resource.
      *
      * @param string $routeName Name of the route require for URI building.
-     * @param array  $data Request body data as associated array.
+     * @param array  $requestData Request body data as associated array.
      *
      * @return string URI of the resource.
      */
-    public function create($routeName, array $data);
+    public function create($routeName, array $requestData);
 
     /**
      * Read resource.
@@ -44,9 +44,9 @@ interface AdapterInterface
      *
      * @param string $routeName Name of the route require for URI building.
      * @param mixed  $identifier Primary identifier of the resource can be string, integer or array.
-     * @param array  $data Request body data as associated array.
+     * @param array  $requestData Request body data as associated array.
      */
-    public function update($routeName, $identifier, array $data);
+    public function update($routeName, $identifier, array $requestData);
 
     /**
      * Delete resource.
