@@ -29,7 +29,7 @@ class AdapterDoctrine
     protected $entityManager;
 
     /**
-     * Name of the entity class FQSEN.
+     * Name of the entity class Fully Qualified Structural Element Name (FQSEN).
      *
      * @var string $classname
      */

@@ -11,6 +11,10 @@ namespace SlimMicroService\Middleware;
 
 /**
  * General methods to be used in middle ware classes.
+ *
+ * @author Mathias Latzko <mathias.latzko@gmail.com>
+ *
+ * @version 0.1
  */
 class MiddlewareAbstract
 {
