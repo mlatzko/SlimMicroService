@@ -110,6 +110,6 @@ class MiddlewareAbstract
             return array();
         }
 
-        return $attributes['route']->getArguments();;
+        return $attributes['route']->getArguments();
     }
 }
