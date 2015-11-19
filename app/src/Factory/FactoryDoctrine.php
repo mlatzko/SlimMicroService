@@ -1,15 +1,37 @@
 <?php
+/**
+ * Slim Micro Service
+ *
+ * @link      https://github.com/mlatzko/SlimMicroService
+ * @copyright Copyright (c) 2015 Mathias Latzko
+ * @license   https://opensource.org/licenses/MIT
+ */
 
 namespace SlimMicroService\Factory;
 
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
+
+/**
+ * Provides a adapter to be inject as dependency into a \Action class.
+ *
+ * @author Mathias Latzko <mathias.latzko@gmail.com>
+ *
+ * @version 0.1 In development.
+ */
 class FactoryDoctrine
 {
-    public function getAdapter(\Noodlehaus\Config $config, $request)
-    {
-        exit(__LINE__.' - '.__METHOD__);
-    }
-
-    public static function getEntityManager(array $config)
+    /**
+     * Provides a configured instance of the doctrine EnitityManager.
+     *
+     * @param array $databaseConfig
+     *
+     * @return Doctrine\ORM\EntityManager Instance of the doctrine EnitityManager.
+     */
+    public static function getEntityManager(array $databaseConfig)
     {
         $doctrineConfig = Setup::createConfiguration(FALSE);
         $driver         = new AnnotationDriver(new AnnotationReader());
@@ -17,16 +39,6 @@ class FactoryDoctrine
         AnnotationRegistry::registerLoader('class_exists');
         $doctrineConfig->setMetadataDriverImpl($driver);
 
-        return EntityManager::create($config, $doctrineConfig);
-    }
-
-    public function getEntity($entityName)
-    {
-
-    }
-
-    public function getValidator()
-    {
-
+        return EntityManager::create($databaseConfig, $doctrineConfig);
     }
 }

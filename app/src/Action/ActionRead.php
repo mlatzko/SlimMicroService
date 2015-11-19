@@ -6,10 +6,15 @@
  * @copyright Copyright (c) 2015 Mathias Latzko
  * @license   https://opensource.org/licenses/MIT
  */
+
 namespace SlimMicroService\Action;
 
 /**
  * Action to handle reading a resource
+ *
+ * @author Mathias Latzko <mathias.latzko@gmail.com>
+ *
+ * @version 0.2
  */
 class ActionRead extends ActionAbstract
 {
@@ -18,18 +23,22 @@ class ActionRead extends ActionAbstract
      */
     public function dispatch($request, $response, $args)
     {
-        // get entity
-        $resource = $this->adapter->read($request);
+        $entity = $this->adapter->read($args['resource'], $args['id']);
 
-        if(NULL === $resource){
-            $responseData = array('status' => 'error', 'message' => 'Not found');
-            return $response->withJson($responseData, 404);
+        if(NULL === $entity){
+            $responseData = array(
+                'status'  => 'error',
+                'content' => 'Resource not found!'
+            );
+
+            return $response
+                ->withJson($responseData, 404);
         }
 
         // set response data
         $responseData = array(
-            'status' => 'ok',
-            'content' => $resource,
+            'status'  => 'ok',
+            'content' => $entity
         );
 
         return $response

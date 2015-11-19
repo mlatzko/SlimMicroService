@@ -1,20 +1,51 @@
 <?php
+/**
+ * Slim Micro Service
+ *
+ * @link      https://github.com/mlatzko/SlimMicroService
+ * @copyright Copyright (c) 2015 Mathias Latzko
+ * @license   https://opensource.org/licenses/MIT
+ */
 
 namespace SlimMicroService\Adapter;
 
 use SlimMicroService\Adapter\AdapterInterface;
 
-abstract class AdapterAbstract implements AdapterInterface
+/**
+ * Default adapter behavior.
+ *
+ * @author Mathias Latzko <mathias.latzko@gmail.com>
+ *
+ * @version 0.1 In development.
+ */
+abstract class AdapterAbstract
+    implements AdapterInterface
 {
-    protected function getArguments($request)
-    {
-        $args       = array();
-        $attributes = $request->getAttributes();
+    /**
+     * Create resource.
+     */
+    public function create($routeName, array $data){
+        throw new \RuntimeException('Method create not implement on adapter.');
+    }
 
-        if(TRUE === isset($attributes['route'])){
-            $args = $attributes['route']->getArguments();
-        }
+    /**
+     * Read resource.
+     */
+    public function read($routeName, $identifier){
+        throw new \RuntimeException('Method create not implement on adapter.');
+    }
 
-        return $args;
+    /**
+     * Update resource.
+     */
+    public function update($routeName, $identifier, array $data){
+        throw new \RuntimeException('Method create not implement on adapter.');
+    }
+
+    /**
+     * Delete resource.
+     */
+    public function delete($identifier){
+        throw new \RuntimeException('Method create not implement on adapter.');
     }
 }

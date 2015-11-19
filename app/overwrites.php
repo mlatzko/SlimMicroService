@@ -14,7 +14,10 @@ $container = $app->getContainer();
 $container['notFoundHandler'] = function ($container) {
     return function ($request, $response) use ($container) {
         $response     = $container['response'];
-        $responseData = array('status' => 'error', 'content' => 'Not found!');
+        $responseData = array(
+            'status'  => 'error',
+            'content' => 'Route not found!'
+        );
 
         return $response
             ->withJson($responseData, 404);
@@ -28,8 +31,8 @@ $container['notAllowedHandler'] = function ($container) {
     return function ($request, $response, $methods) use ($container) {
         $response     = $container['response'];
         $responseData = array(
-            'status' => 'error',
-            'content' => 'HTTP verb must be one of the following for this route: ' . implode(', ', $methods),
+            'status'  => 'error',
+            'content' => 'Method not allowed. Allowed methods: ' . implode(', ', $methods),
         );
 
         return $response

@@ -9,7 +9,7 @@
 
 // Last In First Out call stack by default by Slim.
 $app->add(
-    new SlimMicroService\Middleware\ActionAdapterBuilderMiddleware(
+    new SlimMicroService\Middleware\MiddlewareActionAdapterBuilder(
         $app->getContainer()->get('config'),
         $app->getContainer()->get('logger'),
         $app->getContainer()
@@ -17,7 +17,7 @@ $app->add(
 );
 
 $app->add(
-    new SlimMicroService\Middleware\ActionBuilderMiddleware(
+    new SlimMicroService\Middleware\MiddlewareActionBuilder(
         $app->getContainer()->get('config'),
         $app->getContainer()->get('logger'),
         $app->getContainer()
@@ -25,7 +25,7 @@ $app->add(
 );
 
 $app->add(
-    new SlimMicroService\Middleware\ResourceIsSupportedMiddleware(
+    new SlimMicroService\Middleware\MiddlewareResourceIsSupported(
         $app->getContainer()->get('config'),
         $app->getContainer()->get('logger'),
         $app->getContainer()

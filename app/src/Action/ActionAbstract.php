@@ -6,6 +6,7 @@
  * @copyright Copyright (c) 2015 Mathias Latzko
  * @license   https://opensource.org/licenses/MIT
  */
+
 namespace SlimMicroService\Action;
 
 /**
@@ -14,7 +15,7 @@ namespace SlimMicroService\Action;
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.1 In development.
+ * @version 0.2
  */
 abstract class ActionAbstract
 {
