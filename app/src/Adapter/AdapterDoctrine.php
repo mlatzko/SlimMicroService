@@ -115,7 +115,7 @@ class AdapterDoctrine
     {
         $entity = $this->entityManager->find($this->classname, $identifier);
 
-        return (NULL === $entity) ? array() : $this->entityToArray($routeName, $entity) ;
+        return (NULL === $entity) ? NULL : $this->entityToArray($routeName, $entity) ;
     }
 
     /**
@@ -159,7 +159,7 @@ class AdapterDoctrine
     {
         $entity = $this->entityManager->find($this->classname, $identifier);
 
-        $this->entityManager->remove($product);
+        $this->entityManager->remove($entity);
         $this->entityManager->flush();
     }
 
