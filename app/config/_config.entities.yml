@@ -2,7 +2,6 @@ entitiesConfiguration:
     namespace: SlimMicroService\Entity\
     entityPath: app/src/Entity
     actionsSupported:
-        create: \SlimMicroService\Action\ActionCreate
         read: \SlimMicroService\Action\ActionRead
 
 entities:
