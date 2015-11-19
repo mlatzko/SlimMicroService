@@ -38,18 +38,18 @@ abstract class ActionAbstract
     protected $logger;
 
     /**
-     * Contains a simple registry implementation.
+     * Instance of slim micro service adapter.
      *
-     * @var \App\Registry\RegistryInterface $registry
+     * @var \SlimMicroService\Adapter\Interface $adapter
      */
     protected $adapter;
 
     /**
      * Constructor
      *
-     * @param \Noodlehaus\Config              $config
-     * @param \Psr\Log\LoggerInterface        $logger
-     * @param \App\Registry\RegistryInterface $registry
+     * @param mixed $config Either null of a instance of the config.
+     * @param mixed $logger Either null of a instance of the logger.
+     * @param mixed $adapter Either null of a instance of the adapter.
      */
     public function __construct($config = NULL, $logger = NULL, $adapter = NULL)
     {
@@ -66,16 +66,31 @@ abstract class ActionAbstract
         }
     }
 
+    /**
+     * Set config.
+     *
+     * @param \Noodlehaus\Config $config Instance of \Noodlehaus\Config class.
+     */
     public function setConfig(\Noodlehaus\Config $config)
     {
         $this->config = $config;
     }
 
+    /**
+     * Set logger.
+     *
+     * @param \Noodlehaus\Config $logger Instance of an class based on \Psr\Log\LoggerInterface interface.
+     */
     public function setLogger(\Psr\Log\LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
+    /**
+     * Set adapter.
+     *
+     * @param \SlimMicroService\Adapter\AdapterInterface $logger Instance of an class based on \SlimMicroService\Adapter\AdapterInterface interface.
+     */
     public function setAdapter(\SlimMicroService\Adapter\AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
