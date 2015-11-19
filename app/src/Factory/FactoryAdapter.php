@@ -22,12 +22,12 @@ class FactoryAdapter
      * Provide an instance of the adapter for doctrine.
      *
      * @param string $type
-     * @param \Noodlehaus\Config $config Instance of configuration.
+     * @param \Noodlehaus\ConfigInterface $config Instance of configuration.
      * @param array $args Request arguments.
      *
      * @return \SlimMicroService\Adapter\Interface Instance of slim micros service adapter.
      */
-    public static function getAdapter($type, \Noodlehaus\Config $config, array $args)
+    public static function getAdapter($type, \Noodlehaus\ConfigInterface $config, array $args)
     {
         $methodName = 'get' . ucfirst($type) . 'Adapter';
 
@@ -37,12 +37,12 @@ class FactoryAdapter
     /**
      * Provide an instance of the adapter for doctrine.
      *
-     * @param \Noodlehaus\Config $config Instance of configuration.
+     * @param \Noodlehaus\ConfigInterface $config Instance of configuration.
      * @param array $args Request arguments.
      *
      * @return \SlimMicroService\Adapter\AdapterDoctrine
      */
-    public static function getDoctrineAdapter(\Noodlehaus\Config $config, array $args)
+    public static function getDoctrineAdapter(\Noodlehaus\ConfigInterface $config, array $args)
     {
         $databaseConfig = $config->get('database');
         $entityManager  = \SlimMicroService\Factory\FactoryDoctrine::getEntityManager($databaseConfig);

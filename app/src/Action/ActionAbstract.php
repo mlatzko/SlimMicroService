@@ -21,7 +21,7 @@ abstract class ActionAbstract
     /**
      * Contains an object of the lightweight Noodlehaus config class.
      *
-     * @var \Noodlehaus\Config $config
+     * @var \Noodlehaus\ConfigInterface $config
      *
      * @link https://github.com/hassankhan/config
      */
@@ -68,9 +68,9 @@ abstract class ActionAbstract
     /**
      * Set config.
      *
-     * @param \Noodlehaus\Config $config Instance of \Noodlehaus\Config class.
+     * @param \Noodlehaus\ConfigInterface $config Instance of \Noodlehaus\ConfigInterface class.
      */
-    public function setConfig(\Noodlehaus\Config $config)
+    public function setConfig(\Noodlehaus\ConfigInterface $config)
     {
         $this->config = $config;
     }
@@ -78,7 +78,7 @@ abstract class ActionAbstract
     /**
      * Set logger.
      *
-     * @param \Noodlehaus\Config $logger Instance of an class based on \Psr\Log\LoggerInterface interface.
+     * @param \Noodlehaus\ConfigInterface $logger Instance of an class based on \Psr\Log\LoggerInterface interface.
      */
     public function setLogger(\Psr\Log\LoggerInterface $logger)
     {

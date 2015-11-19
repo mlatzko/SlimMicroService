@@ -21,7 +21,7 @@ class MiddlewareAbstract
     /**
      * Contains an object of the lightweight Noodlehaus config class.
      *
-     * @var \Noodlehaus\Config $config
+     * @var \Noodlehaus\ConfigInterface $config
      *
      * @link https://github.com/hassankhan/config
      */
@@ -46,7 +46,7 @@ class MiddlewareAbstract
     /**
      * Constructor
      *
-     * @param \Noodlehaus\Config $config
+     * @param \Noodlehaus\ConfigInterface $config
      * @param \Monolog\Logger    $logger
      * @param \Slim\Container    $container
      */
@@ -68,9 +68,9 @@ class MiddlewareAbstract
     /**
      * Set configuration.
      *
-     * @param \Noodlehaus\Config $config
+     * @param \Noodlehaus\ConfigInterface $config
      */
-    public function setConfig(\Noodlehaus\Config $config)
+    public function setConfig(\Noodlehaus\ConfigInterface $config)
     {
         $this->config = $config;
     }
