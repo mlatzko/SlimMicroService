@@ -10,8 +10,7 @@
 namespace SlimMicroService\Action;
 
 /**
- * This class contains the default behaviors required for all
- * action classes.
+ * A binding of behavior and route to interact with the service.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *

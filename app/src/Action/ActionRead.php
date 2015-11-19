@@ -10,7 +10,7 @@
 namespace SlimMicroService\Action;
 
 /**
- * Action to handle reading a resource
+ * Behavior of reading a resource.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
