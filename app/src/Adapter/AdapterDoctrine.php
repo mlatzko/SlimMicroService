@@ -119,6 +119,51 @@ class AdapterDoctrine
     }
 
     /**
+     * Update resource.
+     */
+    public function update($routeName, $identifier, array $requestData)
+    {
+        $entity = $this->entityManager->find($this->classname, $identifier);
+
+        foreach ($requestData as $key => $value) {
+            $methodName = 'set' . ucfirst($key);
+
+            if(FALSE === method_exists($entity, $methodName)){
+                continue;
+            }
+
+            $entity->$methodName($value);
+        }
+
+        $fields = $this->entityManager->getClassMetadata(get_class($entity))->fieldMappings;
+
+        foreach ($fields as $key => $value) {
+            $setMethodName = 'set' . ucfirst($key);
+            $getMethodName = 'get' . ucfirst($key);
+
+            if('datetime' === $value['type']){
+                $entity->$setMethodName(
+                    new \DateTime($entity->$getMethodName())
+                );
+            }
+        }
+
+        $this->entityManager->merge($entity);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Delete resource.
+     */
+    public function delete($identifier)
+    {
+        $entity = $this->entityManager->find($this->classname, $identifier);
+
+        $this->entityManager->remove($product);
+        $this->entityManager->flush();
+    }
+
+    /**
      * Transform entity into associative array.
      *
      * @param string $routeName

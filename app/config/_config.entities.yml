@@ -4,6 +4,8 @@ entitiesConfiguration:
     actionsSupported:
         create: \SlimMicroService\Action\ActionCreate
         read: \SlimMicroService\Action\ActionRead
+        update: \SlimMicroService\Action\ActionUpdate
+        delete: \SlimMicroService\Action\ActionDelete
 
 entities:
     example:
