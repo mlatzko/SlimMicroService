@@ -19,7 +19,7 @@ class TestActionRead
     {
         $responseData = array(
             'status'  => 'error',
-            'content' => 'Resource not found!'
+            'content' => 'Resource not found.'
         );
 
         $this->adapter

@@ -14,7 +14,7 @@ namespace SlimMicroService\Action;
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.2
+ * @version 0.2.0 In production
  */
 class ActionCreate extends ActionAbstract
 {

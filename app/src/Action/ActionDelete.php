@@ -10,11 +10,11 @@
 namespace SlimMicroService\Action;
 
 /**
- * Behavior of updating a resource.
+ * Behavior of deleting a resource.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.2
+ * @version 0.2.0 In production
  */
 class ActionDelete extends ActionAbstract
 {
