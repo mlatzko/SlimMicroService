@@ -16,7 +16,7 @@ $container['notFoundHandler'] = function ($container) {
         $response     = $container['response'];
         $responseData = array(
             'status'  => 'error',
-            'content' => 'Route not found!'
+            'content' => 'Route not found.'
         );
 
         return $response
