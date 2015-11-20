@@ -44,13 +44,20 @@ abstract class ActionAbstract
     protected $adapter;
 
     /**
+     * Instance of \Fuel\Validation\Validator validator.
+     *
+     * @var \Fuel\Validation\Validator $validator
+     */
+    protected $validator;
+
+    /**
      * Constructor
      *
      * @param mixed $config Either null of a instance of the config.
      * @param mixed $logger Either null of a instance of the logger.
      * @param mixed $adapter Either null of a instance of the adapter.
      */
-    public function __construct($config = NULL, $logger = NULL, $adapter = NULL)
+    public function __construct($config = NULL, $logger = NULL, $adapter = NULL, $validator = NULL)
     {
         if(NULL !== $config){
             $this->setConfig($config);
@@ -62,6 +69,10 @@ abstract class ActionAbstract
 
         if(NULL !== $adapter){
             $this->setAdapter($adapter);
+        }
+
+        if(NULL !== $validator){
+            $this->setValidator($validator);
         }
     }
 
@@ -93,6 +104,16 @@ abstract class ActionAbstract
     public function setAdapter(\SlimMicroService\Adapter\AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
+    }
+
+    /**
+     * Set validator.
+     *
+     * @param \Fuel\Validation\Validator $validator Instance of an class based on \Fuel\Validation\Validator validator.
+     */
+    public function setValidator(\Fuel\Validation\Validator $validator)
+    {
+        $this->validator = $validator;
     }
 
     /**
