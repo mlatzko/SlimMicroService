@@ -10,7 +10,7 @@ cd $reldir
 sudo service apache2 stop
 sudo service nginx stop
 
-stopudo composer install
+sudo composer install
 
 cd public
 
