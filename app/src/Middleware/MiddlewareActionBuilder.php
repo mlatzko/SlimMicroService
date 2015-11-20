@@ -54,6 +54,7 @@ class MiddlewareActionBuilder extends MiddlewareAbstract
 
             $class->setConfig($this->container->get('config'));
             $class->setLogger($this->container->get('logger'));
+            $class->setValidator($this->container->get('validator'));
 
             $this->container[$className] = $class;
         }

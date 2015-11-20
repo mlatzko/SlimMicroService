@@ -35,3 +35,12 @@ $container['logger'] = function ($c) {
 
     return $logger;
 };
+
+// -----------------------------------------------------------------------------
+// \Fuel\Validation\Validator - https://github.com/fuelphp/validation
+// -----------------------------------------------------------------------------
+$container['validator'] = function ($c) {
+    $validator = new \Fuel\Validation\Validator;
+
+    return $validator;
+};
