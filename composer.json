@@ -24,6 +24,7 @@
         "hassankhan/config": "0.8.2",
         "symfony/yaml": "2.5.0",
         "doctrine/orm": "2.5.1",
-        "doctrine/dbal": "2.5.2"
+        "doctrine/dbal": "2.5.2",
+        "fuelphp/validation": "2.0.0"
     }
 }
