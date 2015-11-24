@@ -28,7 +28,7 @@ class ActionRead extends ActionAbstract
         if(NULL === $entity){
             $responseData = array(
                 'status'  => 'error',
-                'content' => 'Resource not found'
+                'content' => 'Resource not found.'
             );
 
             return $response
