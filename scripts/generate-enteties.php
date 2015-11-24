@@ -71,17 +71,21 @@ $generator->setFieldVisibility('protected');
 $logger->debug('EntityGenerator initialized.');
 
 ### GENERATE ENTITY CLASSES ONLY FOR DEFINED RESOURCES
-
-
 foreach ($entities as $key => $entity) {
     $filename  = $pathname . DIRECTORY_SEPARATOR . $config->get('entities.' . $key . '.classname') . '.php';
     $classname = $namespace . $config->get('entities.' . $key . '.classname');
+    $table     = $config->get('entities.' . $key . '.table');
 
     // Generate file content via Doctrine.
-    $metadata = $factory->getMetadataFor($classname);
+    $metadata = $factory->getMetadataFor($namespace . ucfirst($table));
+
+    $metadata->table = array('name' => $table);
+    $metadata->name  = $classname;
+    $metadata->rootEntityName = $classname;
+
     $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
 
-    $content  = $generator->generateEntityClass($metadata);
+    $content = $generator->generateEntityClass($metadata);
 
     // Write entity class in to target folder.
     file_put_contents($filename, $content);
