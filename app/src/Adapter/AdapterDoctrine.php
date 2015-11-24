@@ -121,7 +121,7 @@ class AdapterDoctrine
     /**
      * Update resource.
      */
-    public function update($routeName, $identifier, array $requestData)
+    public function update($identifier, array $requestData)
     {
         $entity = $this->entityManager->find($this->classname, $identifier);
 
@@ -192,5 +192,12 @@ class AdapterDoctrine
         unset($record['id']);
 
         return $record;
+    }
+
+    public function getSchema()
+    {
+        $schema = $this->entityManager->getClassMetadata($this->classname)->fieldMappings;
+
+        return $schema;
     }
 }

@@ -40,7 +40,29 @@ $container['logger'] = function ($c) {
 // \Fuel\Validation\Validator - https://github.com/fuelphp/validation
 // -----------------------------------------------------------------------------
 $container['validator'] = function ($c) {
-    $validator = new \Fuel\Validation\Validator;
+    $validator = new \SlimMicroService\Validation\Validator;
+
+    // adding custom rules
+    $validator->addCustomRule('SlimMircoServiceDateTime',  '\SlimMicroService\Validation\Rule\DateTime');
 
     return $validator;
+};
+
+// -----------------------------------------------------------------------------
+// \Fuel\Validation\Validator - https://github.com/fuelphp/validation
+// -----------------------------------------------------------------------------
+$container['validator_provider'] = function ($c) {
+    $provider = new \Fuel\Validation\RuleProvider\FromArray;
+
+    return $provider;
+};
+
+// -----------------------------------------------------------------------------
+// \SlimMicroService\Parser\ParserSchemaToValidationRules
+// Parsing the doctrine schema array into an array used for Fuel\Validator.
+// -----------------------------------------------------------------------------
+$container['parser'] = function ($c) {
+    $parser = new \SlimMicroService\Parser\ParserSchemaToValidationRules;
+
+    return $parser;
 };

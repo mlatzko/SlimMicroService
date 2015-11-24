@@ -36,9 +36,16 @@ class Example
     protected $isActive = '0';
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_poweruser", type="boolean", nullable=false)
+     */
+    protected $isPoweruser = '0';
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     protected $name;
 
@@ -48,6 +55,27 @@ class Example
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     protected $email;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="age", type="integer", nullable=false)
+     */
+    protected $age;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="number_of_fingers", type="integer", nullable=false)
+     */
+    protected $numberOfFingers;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     */
+    protected $description;
 
     /**
      * @var \DateTime
@@ -123,6 +151,30 @@ class Example
     }
 
     /**
+     * Set isPoweruser
+     *
+     * @param boolean $isPoweruser
+     *
+     * @return Example
+     */
+    public function setIsPoweruser($isPoweruser)
+    {
+        $this->isPoweruser = $isPoweruser;
+
+        return $this;
+    }
+
+    /**
+     * Get isPoweruser
+     *
+     * @return boolean
+     */
+    public function getIsPoweruser()
+    {
+        return $this->isPoweruser;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
@@ -168,6 +220,78 @@ class Example
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set age
+     *
+     * @param integer $age
+     *
+     * @return Example
+     */
+    public function setAge($age)
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
+    /**
+     * Get age
+     *
+     * @return integer
+     */
+    public function getAge()
+    {
+        return $this->age;
+    }
+
+    /**
+     * Set numberOfFingers
+     *
+     * @param integer $numberOfFingers
+     *
+     * @return Example
+     */
+    public function setNumberOfFingers($numberOfFingers)
+    {
+        $this->numberOfFingers = $numberOfFingers;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfFingers
+     *
+     * @return integer
+     */
+    public function getNumberOfFingers()
+    {
+        return $this->numberOfFingers;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Example
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**

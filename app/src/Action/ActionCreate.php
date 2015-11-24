@@ -27,7 +27,7 @@ class ActionCreate extends ActionAbstract
 
         if(NULL === $requestData){
             $responseData = array(
-                'status' => 'error',
+                'status'  => 'error',
                 'content' => 'No data provided.'
             );
 
@@ -35,7 +35,29 @@ class ActionCreate extends ActionAbstract
                 ->withJson($responseData, 400);
         }
 
-        // @todo - add validation
+        // build validation rules by schema
+        $schema = $this->adapter->getSchema();
+
+        $this->parser->setData($schema);
+        $this->parser->setIgnore(array('id'));
+
+        $rules = $this->parser->parse();
+
+        $this->provider
+            ->setData($rules)
+            ->populateValidator($this->validator);
+
+        $result = $this->validator->run($requestData);
+
+        if(FALSE === $result->isValid()){
+            $responseData = array(
+                'status'  => 'error',
+                'content' => $result->getErrors(),
+            );
+
+            return $response
+                ->withJson($responseData, 400);
+        }
 
         $resource = $this->adapter->create($args['resource'], $requestData);
 
@@ -46,6 +68,7 @@ class ActionCreate extends ActionAbstract
         );
 
         return $response
-            ->withJson($responseData, 200);
+            ->withJson($responseData, 201);
     }
 }
+

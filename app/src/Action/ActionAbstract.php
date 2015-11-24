@@ -57,7 +57,7 @@ abstract class ActionAbstract
      * @param mixed $logger Either null of a instance of the logger.
      * @param mixed $adapter Either null of a instance of the adapter.
      */
-    public function __construct($config = NULL, $logger = NULL, $adapter = NULL, $validator = NULL)
+    public function __construct($config = NULL, $logger = NULL, $adapter = NULL, $validator = NULL, $provider = NULL, $parser = NULL)
     {
         if(NULL !== $config){
             $this->setConfig($config);
@@ -74,6 +74,14 @@ abstract class ActionAbstract
         if(NULL !== $validator){
             $this->setValidator($validator);
         }
+
+        if(NULL !== $provider){
+            $this->setProvider($provider);
+        }
+
+        if(NULL !== $parser){
+            $this->setParser($parser);
+        }
     }
 
     /**
@@ -89,7 +97,7 @@ abstract class ActionAbstract
     /**
      * Set logger.
      *
-     * @param \Noodlehaus\ConfigInterface $logger Instance of an class based on \Psr\Log\LoggerInterface interface.
+     * @param \Noodlehaus\ConfigInterface $logger Instance of an class \Psr\Log\LoggerInterface.
      */
     public function setLogger(\Psr\Log\LoggerInterface $logger)
     {
@@ -99,7 +107,7 @@ abstract class ActionAbstract
     /**
      * Set adapter.
      *
-     * @param \SlimMicroService\Adapter\AdapterInterface $logger Instance of an class based on \SlimMicroService\Adapter\AdapterInterface interface.
+     * @param \SlimMicroService\Adapter\AdapterInterface $logger Instance of class \SlimMicroService\Adapter\AdapterInterface.
      */
     public function setAdapter(\SlimMicroService\Adapter\AdapterInterface $adapter)
     {
@@ -109,11 +117,31 @@ abstract class ActionAbstract
     /**
      * Set validator.
      *
-     * @param \Fuel\Validation\Validator $validator Instance of an class based on \Fuel\Validation\Validator validator.
+     * @param \Fuel\Validation\Validator $validator Instance of class \Fuel\Validation\Validator.
      */
     public function setValidator(\Fuel\Validation\Validator $validator)
     {
         $this->validator = $validator;
+    }
+
+    /**
+     * Set provider.
+     *
+     * @param \Fuel\Validation\RuleProvider\FromArray $provider Instance of class \Fuel\Validation\RuleProvider\FromArray.
+     */
+    public function setProvider(\Fuel\Validation\RuleProvider\FromArray $provider)
+    {
+        $this->provider = $provider;
+    }
+
+    /**
+     * Set parser.
+     *
+     * @param \SlimMicroService\Parser\ParserSchemaToValidationRules $parser Instance of class \SlimMicroService\Parser\ParserSchemaToValidationRules.
+     */
+    public function setParser(\SlimMicroService\Parser\ParserSchemaToValidationRules $parser)
+    {
+        $this->parser = $parser;
     }
 
     /**

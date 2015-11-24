@@ -46,7 +46,7 @@ interface AdapterInterface
      * @param mixed  $identifier Primary identifier of the resource can be string, integer or array.
      * @param array  $requestData Request body data as associated array.
      */
-    public function update($routeName, $identifier, array $requestData);
+    public function update($identifier, array $requestData);
 
     /**
      * Delete resource.
@@ -54,4 +54,11 @@ interface AdapterInterface
      * @param mixed $identifier Primary identifier of the resource can be string, integer or array.
      */
     public function delete($identifier);
+
+    /**
+     * Get Schema.
+     *
+     * @return array - Schema for further usage required for validation handling.
+     */
+    public function getSchema();
 }

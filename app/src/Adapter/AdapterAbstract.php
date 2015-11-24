@@ -25,27 +25,34 @@ abstract class AdapterAbstract
      * Create resource.
      */
     public function create($routeName, array $requestData){
-        throw new \RuntimeException('Method create not implement on adapter.');
+        throw new \RuntimeException('Method create is not implement on adapter.');
     }
 
     /**
      * Read resource.
      */
     public function read($routeName, $identifier){
-        throw new \RuntimeException('Method create not implement on adapter.');
+        throw new \RuntimeException('Method create is not implement on adapter.');
     }
 
     /**
      * Update resource.
      */
-    public function update($routeName, $identifier, array $requestData){
-        throw new \RuntimeException('Method create not implement on adapter.');
+    public function update($identifier, array $requestData){
+        throw new \RuntimeException('Method create is not implement on adapter.');
     }
 
     /**
      * Delete resource.
      */
     public function delete($identifier){
-        throw new \RuntimeException('Method create not implement on adapter.');
+        throw new \RuntimeException('Method create is not implement on adapter.');
+    }
+
+    /**
+     * Get schema,
+     */
+    public function getSchema(){
+        throw new \RuntimeException('Method getSchema is not implement on adapter.');
     }
 }
