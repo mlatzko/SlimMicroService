@@ -24,9 +24,9 @@ class Example
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", nullable=false)
+     * @ORM\Column(name="type", type="string", length=55, nullable=false)
      */
-    protected $type = 'A';
+    protected $type = '';
 
     /**
      * @var boolean
@@ -54,7 +54,7 @@ class Example
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
-    protected $email;
+    protected $email = '';
 
     /**
      * @var integer
@@ -69,6 +69,13 @@ class Example
      * @ORM\Column(name="number_of_fingers", type="integer", nullable=false)
      */
     protected $numberOfFingers;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="number_of_toes", type="integer", nullable=false)
+     */
+    protected $numberOfToes;
 
     /**
      * @var string
@@ -89,7 +96,7 @@ class Example
      *
      * @ORM\Column(name="modified", type="datetime", nullable=false)
      */
-    protected $modified = 'CURRENT_TIMESTAMP';
+    protected $modified = '0000-00-00 00:00:00';
 
 
     /**
@@ -268,6 +275,30 @@ class Example
     public function getNumberOfFingers()
     {
         return $this->numberOfFingers;
+    }
+
+    /**
+     * Set numberOfToes
+     *
+     * @param integer $numberOfToes
+     *
+     * @return Example
+     */
+    public function setNumberOfToes($numberOfToes)
+    {
+        $this->numberOfToes = $numberOfToes;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfToes
+     *
+     * @return integer
+     */
+    public function getNumberOfToes()
+    {
+        return $this->numberOfToes;
     }
 
     /**
