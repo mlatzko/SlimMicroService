@@ -32,11 +32,27 @@ $config = Config::load(__DIR__ . DIRECTORY_SEPARATOR . '/../app/config');
 $logger->debug('Config initialized');
 
 ### SET UP STANDARD VARIABLES
-$pathname  = __DIR__ . '/../' . $config->get('entitiesConfiguration.entityPath');
-$pathnames = array($pathname);
-$namespace = $config->get('entitiesConfiguration.namespace');
-$entities  = $config->get('entities');
+$basePath   = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+$entityPath = $config->get('entitiesConfiguration.entityPath');
+$pathname   = $basePath . $entityPath;
+$pathnames  = array($pathname);
+$namespace  = $config->get('entitiesConfiguration.namespace');
+$entities   = $config->get('entities');
 
+### CREATE ENTITY FOLDER STRUCTURE
+if(FALSE === file_exists($pathname)) {
+    $entityPathFolders = explode(DIRECTORY_SEPARATOR, $entityPath);
+
+    $generatorPath = $basePath;
+
+    foreach ($entityPathFolders as $folderName) {
+        $generatorPath .= $folderName . DIRECTORY_SEPARATOR;
+        if(FALSE === file_exists($generatorPath)){
+            $logger->debug('Folder "' . str_replace($basePath, '', $generatorPath) . '" created.');
+            mkdir($generatorPath);
+        }
+    }
+}
 
 ### SET UP DOCTRINE ENTITY MANAGER
 $entityManager = EntityManager::create(
