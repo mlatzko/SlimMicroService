@@ -9,11 +9,11 @@
 
 namespace SlimMicroService\Factory;
 
-use Doctrine\ORM\Tools\Setup;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
-use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
+use \Doctrine\ORM\Tools\Setup;
+use \Doctrine\ORM\EntityManager;
+use \Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use \Doctrine\Common\Annotations\AnnotationReader;
+use \Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
  * Provides a adapter to be inject as dependency into a \Action class.
@@ -22,7 +22,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
  *
  * @version 0.1 In development.
  */
-class FactoryDoctrine
+class DoctrineFactory
 {
     /**
      * Provides a configured instance of the doctrine EnitityManager.

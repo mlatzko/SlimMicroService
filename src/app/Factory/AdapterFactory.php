@@ -9,6 +9,10 @@
 
 namespace SlimMicroService\Factory;
 
+use \SlimMicroService\Adapter\Doctrine;
+use \SlimMicroService\Factory\DoctrineFactory;
+use \SlimMicroService\Parser\DoctrineSchemaValidationRules;
+
 /**
  * Provides a adapter to be inject as dependency into a \Action class.
  *
@@ -16,7 +20,7 @@ namespace SlimMicroService\Factory;
  *
  * @version 0.1 In development.
  */
-class FactoryAdapter
+class AdapterFactory
 {
     /**
      * Provide an instance of the adapter for doctrine.
@@ -45,13 +49,13 @@ class FactoryAdapter
     public static function getDoctrineAdapter(\Noodlehaus\ConfigInterface $config, array $args)
     {
         $databaseConfig = $config->get('database');
-        $entityManager  = \SlimMicroService\Factory\FactoryDoctrine::getEntityManager($databaseConfig);
+        $entityManager  = DoctrineFactory::getEntityManager($databaseConfig);
+
+        $parser = new DoctrineSchemaValidationRules;
 
         $namespace       = $config->get('entitiesConfiguration.namespace');
         $entityClassname = $namespace . $config->get('entities.' . $args['resource'] . '.classname');
 
-        $parser = new \SlimMicroService\Parser\ParserSchemaToValidationRules;
-
-        return new \SlimMicroService\Adapter\Doctrine($entityManager, $entityClassname, $parser);
+        return new Doctrine($entityManager, $entityClassname, $parser);
     }
 }
