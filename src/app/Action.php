@@ -78,10 +78,6 @@ abstract class Action
         if(NULL !== $provider){
             $this->setProvider($provider);
         }
-
-        if(NULL !== $parser){
-            $this->setParser($parser);
-        }
     }
 
     /**
@@ -132,16 +128,6 @@ abstract class Action
     public function setProvider(\Fuel\Validation\RuleProvider\FromArray $provider)
     {
         $this->provider = $provider;
-    }
-
-    /**
-     * Set parser.
-     *
-     * @param \SlimMicroService\Parser\ParserSchemaToValidationRules $parser Instance of class \SlimMicroService\Parser\ParserSchemaToValidationRules.
-     */
-    public function setParser(\SlimMicroService\Parser\ParserSchemaToValidationRules $parser)
-    {
-        $this->parser = $parser;
     }
 
     /**

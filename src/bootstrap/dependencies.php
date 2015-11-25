@@ -56,13 +56,3 @@ $container['validator_provider'] = function ($c) {
 
     return $provider;
 };
-
-// -----------------------------------------------------------------------------
-// \SlimMicroService\Parser\ParserSchemaToValidationRules
-// Parsing the doctrine schema array into an array used for Fuel\Validator.
-// -----------------------------------------------------------------------------
-$container['parser'] = function ($c) {
-    $parser = new \SlimMicroService\Parser\ParserSchemaToValidationRules;
-
-    return $parser;
-};
