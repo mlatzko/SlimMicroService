@@ -7,12 +7,12 @@ class TestActionRead
     {
         $this->config  = $this->getMockBuilder('\Noodlehaus\ConfigInterface')->getMock();
         $this->logger  = $this->getMockBuilder('\Psr\Log\LoggerInterface')->getMock();
-        $this->adapter = $this->getMockBuilder('\SlimMicroService\Adapter\AdapterInterface')->getMock();
+        $this->adapter = $this->getMockBuilder('\SlimMicroService\Adapter')->getMock();
 
         $this->request  = $this->getMockBuilder('\Slim\Http\Request')->disableOriginalConstructor()->getMock();
         $this->response = $this->getMockBuilder('\Slim\Http\Response')->disableOriginalConstructor()->getMock();
 
-        $this->class = new \SlimMicroService\Action\ActionRead($this->config, $this->logger, $this->adapter);
+        $this->class = new \SlimMicroService\Action\Read($this->config, $this->logger, $this->adapter);
     }
 
     public function testMethodDispatchNotFoundBehavior()
