@@ -24,9 +24,9 @@ class AdapterBuilder extends Middleware
     /**
      * Register adapter.
      *
-     * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
-     * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
-     * @param  callable                                 $next     Next middleware
+     * @param \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
+     * @param \Psr\Http\Message\ResponseInterface      $response PSR7 response
+     * @param callable                                 $next     Next middleware
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -40,7 +40,9 @@ class AdapterBuilder extends Middleware
     }
 
     /**
-     * Set adapter on actions.
+     * Set adapter on all action classes.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
      */
     private function registerAdapter($request)
     {
