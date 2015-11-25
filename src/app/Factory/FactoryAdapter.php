@@ -52,6 +52,6 @@ class FactoryAdapter
 
         $parser = new \SlimMicroService\Parser\ParserSchemaToValidationRules;
 
-        return new \SlimMicroService\Adapter\AdapterDoctrine($entityManager, $entityClassname, $parser);
+        return new \SlimMicroService\Adapter\Doctrine($entityManager, $entityClassname, $parser);
     }
 }

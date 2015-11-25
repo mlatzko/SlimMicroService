@@ -9,17 +9,16 @@
 
 namespace SlimMicroService\Adapter;
 
-use SlimMicroService\Adapter\AdapterAbstract;
+use \SlimMicroService\Adapter;
 
 /**
  * Adapter for doctrine.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.1 In development.
+ * @version 1.0.0-RC-1
  */
-class AdapterDoctrine
-    extends AdapterAbstract
+class Doctrine extends Adapter
 {
     /**
      * Instance of doctrine EntityManager.

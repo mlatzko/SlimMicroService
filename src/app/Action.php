@@ -107,9 +107,9 @@ abstract class Action
     /**
      * Set adapter.
      *
-     * @param \SlimMicroService\Adapter\AdapterInterface $logger Instance of class \SlimMicroService\Adapter\AdapterInterface.
+     * @param \SlimMicroService\Adapter $logger Instance of class \SlimMicroService\Adapter.
      */
-    public function setAdapter(\SlimMicroService\Adapter\AdapterInterface $adapter)
+    public function setAdapter(\SlimMicroService\Adapter $adapter)
     {
         $this->adapter = $adapter;
     }
