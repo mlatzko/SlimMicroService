@@ -16,7 +16,7 @@ use \SlimMicroService\Middleware;
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.1 In development.
+ * @version 1.0.0-RC-1
  */
 class ActionBuilder extends Middleware
 {

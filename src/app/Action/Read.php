@@ -16,7 +16,7 @@ use \SlimMicroService\Action;
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.2.0 In production
+ * @version 1.0.0-RC-1
  */
 class Read extends Action
 {
