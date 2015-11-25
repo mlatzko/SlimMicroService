@@ -9,15 +9,17 @@
 
 namespace SlimMicroService\Middleware;
 
+use \SlimMicroService\Middleware;
+
 /**
  * Checking if the resource request is configured in the configuration. If not
  * it is a not supported resource.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.1 In development.
+ * @version 1.0.0-RC-1
  */
-class MiddlewareResourceIsSupported extends MiddlewareAbstract
+class ResourceIsSupported extends Middleware
 {
     /**
      * Example middleware invokable class

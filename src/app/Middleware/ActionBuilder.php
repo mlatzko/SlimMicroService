@@ -9,17 +9,19 @@
 
 namespace SlimMicroService\Middleware;
 
+use \SlimMicroService\Middleware;
+
 /**
- * Providing a adapter to access a storage.
+ * Configure action classes.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
  * @version 0.1 In development.
  */
-class MiddlewareActionAdapterBuilder extends MiddlewareAbstract
+class ActionBuilder extends Middleware
 {
     /**
-     * Register adapter.
+     * Register actions.
      *
      * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
      * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
@@ -29,7 +31,7 @@ class MiddlewareActionAdapterBuilder extends MiddlewareAbstract
      */
     public function __invoke($request, $response, $next)
     {
-        $this->registerAdapter($request);
+        $this->registerActions();
 
         $response = $next($request, $response);
 
@@ -37,9 +39,10 @@ class MiddlewareActionAdapterBuilder extends MiddlewareAbstract
     }
 
     /**
-     * Set adapter on actions.
+     * Register all actions classes supported into the Slim\Container for
+     * later usage.
      */
-    private function registerAdapter($request)
+    private function registerActions()
     {
         $actionsSupported = $this->config->get('entitiesConfiguration.actionsSupported');
 
@@ -49,10 +52,15 @@ class MiddlewareActionAdapterBuilder extends MiddlewareAbstract
                 continue;
             }
 
-            $args    = $this->getRouteArguments($request);
-            $adapter = \SlimMicroService\Factory\FactoryAdapter::getAdapter('doctrine', $this->config, $args);
+            $class = new $className();
 
-            $this->container[$className]->setAdapter($adapter);
+            $class->setConfig($this->container->get('config'));
+            $class->setLogger($this->container->get('logger'));
+            $class->setValidator($this->container->get('validator'));
+            $class->setProvider($this->container->get('validator_provider'));
+            $class->setParser($this->container->get('parser'));
+
+            $this->container[$className] = $class;
         }
     }
 }

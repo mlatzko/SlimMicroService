@@ -35,18 +35,14 @@ class ActionCreate extends ActionAbstract
                 ->withJson($responseData, 400);
         }
 
-        // build validation rules by schema
-        $schema = $this->adapter->getSchema();
-
-        $this->parser->setData($schema);
-        $this->parser->setIgnore(array('id'));
-
-        $rules = $this->parser->parse();
+        // validation set up
+        $rules = $this->adapter->getValidationRules();
 
         $this->provider
             ->setData($rules)
             ->populateValidator($this->validator);
 
+        // run validation
         $result = $this->validator->run($requestData);
 
         if(FALSE === $result->isValid()){

@@ -60,5 +60,5 @@ interface AdapterInterface
      *
      * @return array - Schema for further usage required for validation handling.
      */
-    public function getSchema();
+    public function getValidationRules();
 }

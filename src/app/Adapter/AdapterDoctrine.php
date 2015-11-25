@@ -36,12 +36,19 @@ class AdapterDoctrine
     protected $classname;
 
     /**
+     *
+     *
+     * @var object $parser
+     */
+    protected $parser;
+
+    /**
      * Construct.
      *
      * @param mixed $entityManager Either null or Instance of doctrine EntityManager.
      * @param mixed $classname Either null or a FQSEN string of the entity class.
      */
-    public function __construct($entityManager = NULL, $classname = NULL)
+    public function __construct($entityManager = NULL, $classname = NULL, $parser = NULL)
     {
         if(NULL !== $entityManager){
             $this->setEntityManger($entityManager);
@@ -49,6 +56,10 @@ class AdapterDoctrine
 
         if(NULL !== $classname){
             $this->setClassname($classname);
+        }
+
+        if(NULL !== $parser){
+            $this->setParser($parser);
         }
     }
 
@@ -70,6 +81,11 @@ class AdapterDoctrine
     public function setClassname($classname)
     {
         $this->classname = $classname;
+    }
+
+    public function setParser($parser)
+    {
+        $this->parser = $parser;
     }
 
     /**
@@ -194,10 +210,15 @@ class AdapterDoctrine
         return $record;
     }
 
-    public function getSchema()
+    public function getValidationRules()
     {
         $schema = $this->entityManager->getClassMetadata($this->classname)->fieldMappings;
 
-        return $schema;
+        $this->parser->setData($schema);
+        $this->parser->setIgnore(array('id'));
+
+        $rules = $this->parser->parse();
+
+        return $rules;
     }
 }

@@ -9,17 +9,20 @@
 
 namespace SlimMicroService\Middleware;
 
+use \SlimMicroService\Middleware;
+use \SlimMicroService\Factory\FactoryAdapter;
+
 /**
- * Configure action classes.
+ * Providing a adapter to access a storage.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
  * @version 0.1 In development.
  */
-class MiddlewareActionBuilder extends MiddlewareAbstract
+class AdapterBuilder extends Middleware
 {
     /**
-     * Register actions.
+     * Register adapter.
      *
      * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
      * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
@@ -29,7 +32,7 @@ class MiddlewareActionBuilder extends MiddlewareAbstract
      */
     public function __invoke($request, $response, $next)
     {
-        $this->registerActions();
+        $this->registerAdapter($request);
 
         $response = $next($request, $response);
 
@@ -37,10 +40,9 @@ class MiddlewareActionBuilder extends MiddlewareAbstract
     }
 
     /**
-     * Register all actions classes supported into the Slim\Container for
-     * later usage.
+     * Set adapter on actions.
      */
-    private function registerActions()
+    private function registerAdapter($request)
     {
         $actionsSupported = $this->config->get('entitiesConfiguration.actionsSupported');
 
@@ -50,15 +52,10 @@ class MiddlewareActionBuilder extends MiddlewareAbstract
                 continue;
             }
 
-            $class = new $className();
+            $args    = $this->getRouteArguments($request);
+            $adapter = FactoryAdapter::getAdapter('doctrine', $this->config, $args);
 
-            $class->setConfig($this->container->get('config'));
-            $class->setLogger($this->container->get('logger'));
-            $class->setValidator($this->container->get('validator'));
-            $class->setProvider($this->container->get('validator_provider'));
-            $class->setParser($this->container->get('parser'));
-
-            $this->container[$className] = $class;
+            $this->container[$className]->setAdapter($adapter);
         }
     }
 }

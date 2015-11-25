@@ -52,12 +52,7 @@ class ActionUpdate extends ActionAbstract
         $requestData = array_merge($entity, $requestData);
 
         // build validation rules by schema
-        $schema = $this->adapter->getSchema();
-
-        $this->parser->setData($schema);
-        $this->parser->setIgnore(array('id'));
-
-        $rules = $this->parser->parse();
+        $rules = $this->adapter->getValidationRules();
 
         $this->provider
             ->setData($rules)

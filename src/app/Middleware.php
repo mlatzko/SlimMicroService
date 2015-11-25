@@ -7,16 +7,16 @@
  * @license   https://opensource.org/licenses/MIT
  */
 
-namespace SlimMicroService\Middleware;
+namespace SlimMicroService;
 
 /**
  * General methods to be used in middle ware classes.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.1
+ * @version 1.0.0-RC-1
  */
-class MiddlewareAbstract
+class Middleware
 {
     /**
      * Contains an object of the lightweight Noodlehaus config class.

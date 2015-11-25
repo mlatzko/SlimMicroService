@@ -52,7 +52,7 @@ abstract class AdapterAbstract
     /**
      * Get schema,
      */
-    public function getSchema(){
-        throw new \RuntimeException('Method getSchema is not implement on adapter.');
+    public function getValidationRules(){
+        throw new \RuntimeException('Method getValidationRules is not implement on adapter.');
     }
 }

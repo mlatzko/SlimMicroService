@@ -50,6 +50,8 @@ class FactoryAdapter
         $namespace       = $config->get('entitiesConfiguration.namespace');
         $entityClassname = $namespace . $config->get('entities.' . $args['resource'] . '.classname');
 
-        return new \SlimMicroService\Adapter\AdapterDoctrine($entityManager, $entityClassname);
+        $parser = new \SlimMicroService\Parser\ParserSchemaToValidationRules;
+
+        return new \SlimMicroService\Adapter\AdapterDoctrine($entityManager, $entityClassname, $parser);
     }
 }
