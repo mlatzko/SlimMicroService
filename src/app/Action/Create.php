@@ -44,6 +44,21 @@ class Create extends Action
             ->setData($rules)
             ->populateValidator($this->validator);
 
+        // check for to many fields
+        $rulesKeys       = array_keys($rules);
+        $requestDataKeys = array_keys($requestData);
+        $differences     = array_diff($requestDataKeys, $rulesKeys);
+
+        if(FALSE === empty($differences)){
+            $responseData = array(
+                'status'  => 'error',
+                'content' => 'The field/s are not supported: ' . implode(',', $differences)
+            );
+
+            return $response
+                ->withJson($responseData, 400);
+        }
+
         // run validation
         $result = $this->validator->run($requestData);
 
