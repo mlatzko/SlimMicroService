@@ -10,4 +10,5 @@ cd $reldir
 sudo composer install
 
 cd scripts
+
 php -f generate-enteties.php

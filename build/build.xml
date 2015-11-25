@@ -34,12 +34,12 @@
         <apply executable="php" failonerror="true">
             <arg value="-l" />
 
-            <fileset dir="${basedir}/../app">
+            <fileset dir="${basedir}/../src/app">
                 <include name="**/*.php" />
                 <modified />
             </fileset>
 
-            <fileset dir="${basedir}/../public">
+            <fileset dir="${basedir}/../src/public">
                 <include name="**/*.php" />
                 <modified />
             </fileset>
@@ -63,7 +63,7 @@
             <arg value="--exclude=bootstrap,config,tests" />
             <arg value="--log-pmd" />
             <arg value="${basedir}/reports/phpcpd.xml" />
-            <arg value="${basedir}/../app" />
+            <arg value="${basedir}/../src/app" />
         </exec>
     </target>
 

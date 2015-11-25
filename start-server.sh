@@ -12,6 +12,6 @@ sudo service nginx stop
 
 sudo composer install
 
-cd public
+cd src/public
 
 sudo php -S 0.0.0.0:80

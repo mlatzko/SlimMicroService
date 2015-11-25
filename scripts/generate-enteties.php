@@ -10,7 +10,7 @@
  * @link http://stackoverflow.com/questions/12754365/doctrine-2-3-entity-generator-samples-docs
  * @link https://gist.github.com/tawfekov/4079388
  */
-include '../vendor/autoload.php';
+include '../src/vendor/autoload.php';
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\DatabaseDriver;
@@ -27,7 +27,7 @@ $logger->pushHandler(new Monolog\Handler\StreamHandler('php://stdout', Monolog\L
 $logger->debug('Logger initialized');
 
 ### SET UP CONFIG
-$config = Config::load(__DIR__ . DIRECTORY_SEPARATOR . '/../app/config');
+$config = Config::load(__DIR__ . DIRECTORY_SEPARATOR . '/../src/config');
 
 $logger->debug('Config initialized');
 

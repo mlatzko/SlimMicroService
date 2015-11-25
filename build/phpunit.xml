@@ -1,4 +1,4 @@
-<phpunit bootstrap="../app/tests/bootstrap.php"
+<phpunit bootstrap="../tests/bootstrap.php"
          backupGlobals="false"
          backupStaticAttributes="false"
          convertErrorsToExceptions="true"
@@ -8,14 +8,13 @@
          stopOnFailure="true"
          syntaxCheck="true"
          colors="true"
-         strict="true"
          timeoutForSmallTests="5"
          timeoutForMediumTests="10"
          timeoutForLargeTests="15"
 >
     <testsuites>
         <testsuite name="Application">
-            <directory suffix=".php">../app/tests/src</directory>
+            <directory suffix=".php">../tests/app</directory>
         </testsuite>
     </testsuites>
 

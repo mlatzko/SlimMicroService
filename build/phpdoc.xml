@@ -20,6 +20,6 @@
         <template name="clean" />
     </transformations>
     <files>
-        <directory>../app</directory>
+        <directory>../src/app</directory>
     </files>
 </phpdoc>

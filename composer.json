@@ -11,11 +11,13 @@
             "homepage": "http://mlatzko.github.io/"
         }
     ],
+    "config": {
+        "vendor-dir": "src/vendor"
+    },
     "autoload": {
         "psr-4": {
-            "App\\": "app/src",
-            "SlimMicroService\\": "app/src",
-            "Noodlehaus\\": "vendor/hassankhan/config/src"
+            "SlimMicroService\\": "src/app",
+            "Noodlehaus\\": "src/vendor/hassankhan/config/src"
         }
     },
     "require": {

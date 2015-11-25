@@ -2,7 +2,7 @@
 /build/cache.properties
 !/build/.gitkeep
 
-/vendor/
-!/vendor/.gitkeep
+/src/vendor/
+!/src/vendor/.gitkeep
 
 /composer.lock

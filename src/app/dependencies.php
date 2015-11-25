@@ -12,7 +12,7 @@ $container = $app->getContainer();
 // Noodlehaus\Config - https://github.com/hassankhan/config
 // -----------------------------------------------------------------------------
 $container['config'] = function ($c) {
-    $config = Noodlehaus\Config::load(__DIR__ . DIRECTORY_SEPARATOR . 'config');
+    $config = Noodlehaus\Config::load(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR. 'config');
 
     return $config;
 };
