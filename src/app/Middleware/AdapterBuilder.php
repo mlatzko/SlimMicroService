@@ -10,7 +10,7 @@
 namespace SlimMicroService\Middleware;
 
 use \SlimMicroService\Middleware;
-use \SlimMicroService\Factory\AdapterFactory;
+use \SlimMicroService\Factory\AdapterLoader;
 
 /**
  * Providing a adapter to access a storage.
@@ -53,7 +53,7 @@ class AdapterBuilder extends Middleware
             }
 
             $args    = $this->getRouteArguments($request);
-            $adapter = AdapterFactory::getAdapter('doctrine', $this->config, $args);
+            $adapter = AdapterLoader::getAdapter('doctrine', $this->config, $args);
 
             $this->container[$className]->setAdapter($adapter);
         }

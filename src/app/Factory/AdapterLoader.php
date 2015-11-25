@@ -10,7 +10,7 @@
 namespace SlimMicroService\Factory;
 
 use \SlimMicroService\Adapter\Doctrine;
-use \SlimMicroService\Factory\DoctrineFactory;
+use \SlimMicroService\Factory\DoctrineEntityManagerLoader;
 use \SlimMicroService\Parser\DoctrineSchemaValidationRules;
 
 /**
@@ -20,7 +20,7 @@ use \SlimMicroService\Parser\DoctrineSchemaValidationRules;
  *
  * @version 1.0.0-RC-1
  */
-class AdapterFactory
+class AdapterLoader
 {
     /**
      * Provide an instance of the adapter for doctrine.
@@ -49,7 +49,7 @@ class AdapterFactory
     public static function getDoctrineAdapter(\Noodlehaus\ConfigInterface $config, array $args)
     {
         $databaseConfig = $config->get('database');
-        $entityManager  = DoctrineFactory::getEntityManager($databaseConfig);
+        $entityManager  = DoctrineEntityManagerLoader::getEntityManager($databaseConfig);
 
         $parser = new DoctrineSchemaValidationRules;
 
