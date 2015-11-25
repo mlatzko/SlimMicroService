@@ -9,39 +9,29 @@
 
 namespace SlimMicroService\Action;
 
+use \SlimMicroService\Action;
+
 /**
- * Behavior of reading a resource.
+ * Behavior of deleting a resource.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
  * @version 0.2.0 In production
  */
-class ActionRead extends ActionAbstract
+class Delete extends Action
 {
     /**
-     * Read resource.
+     * Delete resource.
      */
     public function dispatch($request, $response, $args)
     {
         $entity = $this->adapter->read($args['resource'], $args['id']);
 
-        if(NULL === $entity){
-            $responseData = array(
-                'status'  => 'error',
-                'content' => 'Resource not found.'
-            );
-
-            return $response
-                ->withJson($responseData, 404);
+        if(NULL !== $entity){
+            $this->adapter->delete($args['id']);
         }
 
-        // set response data
-        $responseData = array(
-            'status'  => 'ok',
-            'content' => $entity
-        );
-
         return $response
-            ->withJson($responseData, 200);
+            ->withStatus(204);
     }
 }

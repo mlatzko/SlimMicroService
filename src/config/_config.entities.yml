@@ -2,10 +2,10 @@ entitiesConfiguration:
     namespace: SlimMicroService\Entity\
     entityPath: src/app/Entity
     actionsSupported:
-        create: \SlimMicroService\Action\ActionCreate
-        read: \SlimMicroService\Action\ActionRead
-        update: \SlimMicroService\Action\ActionUpdate
-        delete: \SlimMicroService\Action\ActionDelete
+        create: \SlimMicroService\Action\Create
+        read: \SlimMicroService\Action\Read
+        update: \SlimMicroService\Action\Update
+        delete: \SlimMicroService\Action\Delete
 
 entities:
     example:

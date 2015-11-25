@@ -9,7 +9,7 @@
 
 $app->post('/{resource}', '\SlimMicroService\Action\ActionCreate:dispatch');
 
-$app->get('/{resource}/{id}', '\SlimMicroService\Action\ActionRead:dispatch');
+$app->get('/{resource}/{id}', '\SlimMicroService\Action\Read:dispatch');
 
 $app->post('/{resource}/{id}', '\SlimMicroService\Action\ActionUpdate:dispatch');
 $app->patch('/{resource}/{id}', '\SlimMicroService\Action\ActionUpdate:dispatch');

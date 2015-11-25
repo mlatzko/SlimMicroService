@@ -7,16 +7,16 @@
  * @license   https://opensource.org/licenses/MIT
  */
 
-namespace SlimMicroService\Action;
+namespace SlimMicroService;
 
 /**
  * A binding of behavior and route to interact with the service.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
- * @version 0.2.0 In production
+ * @version 1.0.0-RC-1
  */
-abstract class ActionAbstract
+abstract class Action
 {
     /**
      * Contains an object of the lightweight Noodlehaus config class.

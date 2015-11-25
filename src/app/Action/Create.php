@@ -9,6 +9,8 @@
 
 namespace SlimMicroService\Action;
 
+use \SlimMicroService\Action;
+
 /**
  * Behavior of creating a resource.
  *
@@ -16,7 +18,7 @@ namespace SlimMicroService\Action;
  *
  * @version 0.2.0 In production
  */
-class ActionCreate extends ActionAbstract
+class Create extends Action
 {
     /**
      * Read resource.
