@@ -110,12 +110,14 @@ class Doctrine extends Adapter
             $setMethodName = 'set' . ucfirst($key);
             $getMethodName = 'get' . ucfirst($key);
 
-            if('datetime' === $value['type']){
+            if('datetime' === $value['type'] && NULL !== $entity->$getMethodName()) {
                 $entity->$setMethodName(
                     new \DateTime($entity->$getMethodName())
                 );
             }
         }
+
+        $entity->markAsCreated();
 
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
@@ -162,6 +164,8 @@ class Doctrine extends Adapter
                 );
             }
         }
+
+        $entity->markAsUpdated();
 
         $this->entityManager->merge($entity);
         $this->entityManager->flush();

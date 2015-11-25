@@ -1,252 +1,37 @@
 <?php
+/**
+ * Slim Micro Service
+ *
+ * @link      https://github.com/mlatzko/SlimMicroService
+ * @copyright Copyright (c) 2015 Mathias Latzko
+ * @license   https://opensource.org/licenses/MIT
+ */
 
 namespace SlimMicroService\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * Example
+ * Entity handling to be extended by Doctrine generated class.
  *
- * @ORM\Table(name="example")
- * @ORM\Entity
+ * @author Mathias Latzko <mathias.latzko@gmail.com>
+ *
+ * @version 1.0.0-RC-1
  */
 class Example
 {
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * Set created & modified to now.
      */
-    protected $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=55, nullable=false)
-     */
-    protected $type;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_active", type="boolean", nullable=false)
-     */
-    protected $isActive = '0';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
-     */
-    protected $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     */
-    protected $email;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="age", type="integer", nullable=false)
-     */
-    protected $age;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created", type="datetime", nullable=false)
-     */
-    protected $created = '0000-00-00 00:00:00';
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="modified", type="datetime", nullable=false)
-     */
-    protected $modified = '0000-00-00 00:00:00';
-
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function markAsCreated()
     {
-        return $this->id;
+        $this->setCreated(new \DateTime());
+        $this->markAsUpdated();
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Example
+     * Set modified to now.
      */
-    public function setType($type)
+    public function markAsUpdated()
     {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     *
-     * @return Example
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Example
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return Example
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set age
-     *
-     * @param integer $age
-     *
-     * @return Example
-     */
-    public function setAge($age)
-    {
-        $this->age = $age;
-
-        return $this;
-    }
-
-    /**
-     * Get age
-     *
-     * @return integer
-     */
-    public function getAge()
-    {
-        return $this->age;
-    }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
-     * @return Example
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Get created
-     *
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Set modified
-     *
-     * @param \DateTime $modified
-     *
-     * @return Example
-     */
-    public function setModified($modified)
-    {
-        $this->modified = $modified;
-
-        return $this;
-    }
-
-    /**
-     * Get modified
-     *
-     * @return \DateTime
-     */
-    public function getModified()
-    {
-        return $this->modified;
+        $this->setModified(new \DateTime());
     }
 }
-

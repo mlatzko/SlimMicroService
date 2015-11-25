@@ -1,6 +1,6 @@
 entitiesConfiguration:
-    namespace: SlimMicroService\Entity\
-    entityPath: src/app/Entity
+    namespace: SlimMicroService\Entity\Doctrine\
+    entityPath: src/app/Entity/Doctrine/
     actionsSupported:
         create: \SlimMicroService\Action\Create
         read: \SlimMicroService\Action\Read
@@ -12,3 +12,4 @@ entities:
         adapter: doctrine
         table: example
         classname: Example
+        extends: \SlimMicroService\Entity\Example

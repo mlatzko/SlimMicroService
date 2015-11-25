@@ -80,7 +80,7 @@ $generator = new EntityGenerator();
 $generator->setGenerateAnnotations(true);
 $generator->setGenerateStubMethods(true);
 $generator->setRegenerateEntityIfExists(true);
-$generator->setUpdateEntityIfExists(true);
+$generator->setUpdateEntityIfExists(false);
 $generator->setBackupExisting(false);
 $generator->setFieldVisibility('protected');
 
@@ -91,6 +91,7 @@ foreach ($entities as $key => $entity) {
     $filename  = $pathname . DIRECTORY_SEPARATOR . $config->get('entities.' . $key . '.classname') . '.php';
     $classname = $namespace . $config->get('entities.' . $key . '.classname');
     $table     = $config->get('entities.' . $key . '.table');
+    $extends   = $config->get('entities.' . $key . '.extends');
 
     // Generate file content via Doctrine.
     $metadata = $factory->getMetadataFor($namespace . ucfirst($table));
@@ -98,6 +99,10 @@ foreach ($entities as $key => $entity) {
     $metadata->table = array('name' => $table);
     $metadata->name  = $classname;
     $metadata->rootEntityName = $classname;
+
+    if(NULL !== $extends){
+        $generator->setClassToExtend($extends);
+    }
 
     $metadata->setIdGenerator(new \Doctrine\ORM\Id\AssignedGenerator());
 
