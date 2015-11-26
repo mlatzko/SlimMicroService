@@ -26,7 +26,7 @@
 
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../app/src</directory>
+            <directory suffix=".php">../src/app</directory>
         </whitelist>
         <blacklist>
             <directory suffix=".php">../vendor</directory>
