@@ -1,30 +1,35 @@
 # SlimMicroService
-The goal of this micro service is to provide a minimum viable service which performs validation of entities by using the schema of the underlaying storage. So sorry girls noSQL not included, joke aside you can as well provide a validation schema for your entities.
+this piece of software provides a skeleton to create micro services which has
+one or multiple single RestFul(Like) interface which represents a database
+tables without foreign key handling. The service only provides CRUD without
+search capability.
+
+### How does it work?
+Create a database, configure db & entities, generate entities & start server.
+
+### When to use?
+Wanna build a service in under 15 minutes for one database table.
 
 ## Requirements
 * PHP (v5.6.X or higher)
 * MySQL (v5.5.X or higher) to run the included example
 * phpcpd, phpcs, phpdoc, phpunit & ant (only if you want to run the full build)
 
-## Installation
-```
-composer require mlatzko/SlimMicroService
-```
-
-## Set up the service on localhost:8080
+## Generate Doctrine based entities.
 This will create the entity classes required to access the database.
 ```
-./setup.sh
+./setup-svc-entties.sh
 ```
 
 ## Run the service on localhost:8080
 This will use the PHP built-in server to launch a server.
 ```
-./run.sh
+./start-server.sh
 ```
 
 ## Special Thanks
-Jan and Andreas from http://aero-code.com/. See also their repositories https://github.com/PiMastah and https://github.com/amandiel.
+Jan and Andreas from http://aero-code.com/. See also their repositories
+https://github.com/PiMastah and https://github.com/amandiel.
 
 ## License
 https://github.com/mlatzko/SlimMicroService/blob/master/LICENSE
