@@ -51,13 +51,20 @@ abstract class Action
     protected $validator;
 
     /**
+     * Instance of \Fuel\Validation\RuleProvider\FromArray provider.
+     *
+     * @var \Fuel\Validation\RuleProvider\FromArray $provider
+     */
+    protected $provider;
+
+    /**
      * Constructor
      *
      * @param mixed $config Either null of a instance of the config.
      * @param mixed $logger Either null of a instance of the logger.
      * @param mixed $adapter Either null of a instance of the adapter.
      */
-    public function __construct($config = NULL, $logger = NULL, $adapter = NULL, $validator = NULL, $provider = NULL, $parser = NULL)
+    public function __construct($config = NULL, $logger = NULL, $adapter = NULL, $validator = NULL, $provider = NULL)
     {
         if(NULL !== $config){
             $this->setConfig($config);
