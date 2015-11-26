@@ -31,9 +31,12 @@ This will use the PHP built-in server to launch a server.
 Jan and Andreas from http://aero-code.com/. See also their repositories
 https://github.com/PiMastah and https://github.com/amandiel.
 
+## Uses
 https://github.com/slimphp/Slim<br>
+https://github.com/Seldaek/monolog<br>
+https://github.com/hassankhan/config<br>
 https://github.com/fuelphp/validation<br>
-https://github.com/doctrine/doctrine2<br>
+https://github.com/doctrine/doctrine2
 
 ## License
 https://github.com/mlatzko/SlimMicroService/blob/master/LICENSE
