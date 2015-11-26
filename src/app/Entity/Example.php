@@ -24,7 +24,6 @@ class Example
     public function markAsCreated()
     {
         $this->setCreated(new \DateTime());
-        $this->markAsUpdated();
     }
 
     /**

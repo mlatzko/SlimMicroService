@@ -22,7 +22,7 @@ use \Doctrine\Common\Annotations\AnnotationRegistry;
  *
  * @version 1.0.0-RC-1
  */
-class DoctrineEntityManagerLoader
+class EntityManagerLoader
 {
     /**
      * Provides a configured instance of the doctrine EnitityManager.

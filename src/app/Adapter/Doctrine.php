@@ -28,37 +28,50 @@ class Doctrine extends Adapter
     protected $entityManager;
 
     /**
-     * Name of the entity class Fully Qualified Structural Element Name (FQSEN).
+     * A doctrine generated entity class.
      *
-     * @var string $classname
+     * @var object $entity
      */
-    protected $classname;
+    protected $entity;
 
     /**
+     * A parser class.
      *
-     *
-     * @var object $parser
+     * @var \SlimMicroService\Parser\DoctrineSchemaValidationRules $parser
      */
     protected $parser;
 
     /**
+     * A serializer class.
+     *
+     * @var \SlimMicroService\Serializer\DoctrineEntitySerializer $serializer
+     */
+    protected $serializer;
+
+    /**
      * Construct.
      *
-     * @param mixed $entityManager Either null or Instance of doctrine EntityManager.
-     * @param mixed $classname Either null or a FQSEN string of the entity class.
+     * @param mixed $entityManager Either null or an entity manager class.
+     * @param mixed $entity        Either null or an entity class.
+     * @param mixed $parser        Either null or a parser class.
+     * @param mixed $serializer    Either null or a serializer class.
      */
-    public function __construct($entityManager = NULL, $classname = NULL, $parser = NULL)
+    public function __construct($entityManager = NULL, $entity = NULL, $parser = NULL, $serializer)
     {
         if(NULL !== $entityManager){
             $this->setEntityManger($entityManager);
         }
 
-        if(NULL !== $classname){
-            $this->setClassname($classname);
+        if(NULL !== $entity){
+            $this->setEntity($entity);
         }
 
         if(NULL !== $parser){
             $this->setParser($parser);
+        }
+
+        if(NULL !== $serializer){
+            $this->setSerializer($serializer);
         }
     }
 
@@ -73,18 +86,33 @@ class Doctrine extends Adapter
     }
 
     /**
-     * Set FQSEN class name of entity.
+     * Set entity.
      *
-     * @classname string $classname FQSEN string of the entity class.
+     * @entity object $entity
      */
-    public function setClassname($classname)
+    public function setEntity($entity)
     {
-        $this->classname = $classname;
+        $this->entity = $entity;
     }
 
-    public function setParser($parser)
+    /**
+     * Set parser.
+     *
+     * @param \SlimMicroService\Parser\DoctrineSchemaValidationRules $parser
+     */
+    public function setParser(\SlimMicroService\Parser\DoctrineSchemaValidationRules $parser)
     {
         $this->parser = $parser;
+    }
+
+    /**
+     * Set serializer.
+     *
+     * @param \SlimMicroService\Serializer\DoctrineEntitySerializer $serializer
+     */
+    public function setSerializer(\SlimMicroService\Serializer\DoctrineEntitySerializer $serializer)
+    {
+        $this->serializer = $serializer;
     }
 
     /**
@@ -92,37 +120,20 @@ class Doctrine extends Adapter
      */
     public function create($routeName, array $requestData)
     {
-        $entity = new $this->classname;
+        $entity = $this->serializer->toEntity($this->entity, $requestData);
 
-        foreach ($requestData as $key => $value) {
-            $methodName = 'set' . ucfirst($key);
-
-            if(FALSE === method_exists($entity, $methodName)){
-                continue;
-            }
-
-            $entity->$methodName($value);
+        if(NULL === $entity->getCreated()){
+            $entity->markAsCreated();
         }
 
-        $fields = $this->entityManager->getClassMetadata(get_class($entity))->fieldMappings;
-
-        foreach ($fields as $key => $value) {
-            $setMethodName = 'set' . ucfirst($key);
-            $getMethodName = 'get' . ucfirst($key);
-
-            if('datetime' === $value['type'] && NULL !== $entity->$getMethodName()) {
-                $entity->$setMethodName(
-                    new \DateTime($entity->$getMethodName())
-                );
-            }
+        if(NULL === $entity->getModified()){
+            $entity->markAsUpdated();
         }
-
-        $entity->markAsCreated();
 
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
 
-        return (NULL === $entity) ? array() : $this->entityToArray($routeName, $entity) ;
+        return (NULL === $entity) ? NULL : $this->serializer->toArray($entity, $routeName) ;
     }
 
     /**
@@ -130,9 +141,9 @@ class Doctrine extends Adapter
      */
     public function read($routeName, $identifier)
     {
-        $entity = $this->entityManager->find($this->classname, $identifier);
+        $entity = $this->entityManager->find(get_class($this->entity), $identifier);
 
-        return (NULL === $entity) ? NULL : $this->entityToArray($routeName, $entity) ;
+        return (NULL === $entity) ? NULL : $this->serializer->toArray($entity, $routeName) ;
     }
 
     /**
@@ -140,30 +151,9 @@ class Doctrine extends Adapter
      */
     public function update($identifier, array $requestData)
     {
-        $entity = $this->entityManager->find($this->classname, $identifier);
+        $entity = $this->entityManager->find(get_class($this->entity), $identifier);
 
-        foreach ($requestData as $key => $value) {
-            $methodName = 'set' . ucfirst($key);
-
-            if(FALSE === method_exists($entity, $methodName)){
-                continue;
-            }
-
-            $entity->$methodName($value);
-        }
-
-        $fields = $this->entityManager->getClassMetadata(get_class($entity))->fieldMappings;
-
-        foreach ($fields as $key => $value) {
-            $setMethodName = 'set' . ucfirst($key);
-            $getMethodName = 'get' . ucfirst($key);
-
-            if('datetime' === $value['type']){
-                $entity->$setMethodName(
-                    new \DateTime($entity->$getMethodName())
-                );
-            }
-        }
+        $entity = $this->serializer->toEntity($entity, $requestData);
 
         $entity->markAsUpdated();
 
@@ -176,46 +166,20 @@ class Doctrine extends Adapter
      */
     public function delete($identifier)
     {
-        $entity = $this->entityManager->find($this->classname, $identifier);
+        $entity = $this->entityManager->find(get_class($this->entity), $identifier);
 
         $this->entityManager->remove($entity);
         $this->entityManager->flush();
     }
 
     /**
-     * Transform entity into associative array.
-     *
-     * @param string $routeName
-     * @param object $entity
+     * Provide validation rules for \Fule\Validator.
      *
      * @return array
      */
-    private function entityToArray($routeName, $entity)
-    {
-        $fields = $this->entityManager->getClassMetadata(get_class($entity))->fieldMappings;
-
-        $record = array(
-            'uri' => '/' . $routeName . '/' . $entity->getId(),
-        );
-
-        foreach ($fields as $key => $value) {
-            $methodName = 'get' . ucfirst($value['fieldName']);
-
-            $record[$value['fieldName']] = $entity->$methodName();
-
-            if('datetime' === $value['type']) {
-                $record[$value['fieldName']] = $entity->$methodName()->format('c');
-            }
-        }
-
-        unset($record['id']);
-
-        return $record;
-    }
-
     public function getValidationRules()
     {
-        $schema = $this->entityManager->getClassMetadata($this->classname)->fieldMappings;
+        $schema = $this->entityManager->getClassMetadata(get_class($this->entity))->fieldMappings;
 
         $this->parser->setData($schema);
         $this->parser->setIgnore(array('id'));

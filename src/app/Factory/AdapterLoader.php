@@ -9,9 +9,11 @@
 
 namespace SlimMicroService\Factory;
 
+use \RuntimeException;
 use \SlimMicroService\Adapter\Doctrine;
-use \SlimMicroService\Factory\DoctrineEntityManagerLoader;
+use \SlimMicroService\Factory\EntityManagerLoader;
 use \SlimMicroService\Parser\DoctrineSchemaValidationRules;
+use \SlimMicroService\Serializer\DoctrineEntitySerializer;
 
 /**
  * Provides a adapter to be inject as dependency into a \Action class.
@@ -49,13 +51,19 @@ class AdapterLoader
     public static function getDoctrineAdapter(\Noodlehaus\ConfigInterface $config, array $args)
     {
         $databaseConfig = $config->get('database');
-        $entityManager  = DoctrineEntityManagerLoader::getEntityManager($databaseConfig);
-
-        $parser = new DoctrineSchemaValidationRules;
+        $entityManager  = EntityManagerLoader::getEntityManager($databaseConfig);
 
         $namespace       = $config->get('entitiesConfiguration.namespace');
         $entityClassname = $namespace . $config->get('entities.' . $args['resource'] . '.classname');
 
-        return new Doctrine($entityManager, $entityClassname, $parser);
+        if(FALSE === class_exists($entityClassname)){
+            throw new RuntimeException('Entity class does not exists. Maybe it is not generated.');
+        }
+
+        $entity     = new $entityClassname;
+        $parser     = new DoctrineSchemaValidationRules;
+        $serializer = new DoctrineEntitySerializer($entityManager);
+
+        return new Doctrine($entityManager, $entity, $parser, $serializer);
     }
 }
