@@ -112,8 +112,8 @@ class DoctrineEntitySerializer
             throw new \RuntimeException('Method "'.$methodName.'" does not exists on entity class "' . get_class($entity) . '".');
         }
 
-        // If have to assume that the validation catch invalid dates which are not ISO-8601
-        // see: https://en.wikipedia.org/wiki/ISO_8601
+        // We have to assume that the validation catch invalid date formats which are not ISO-8601
+        // see: https://github.com/mlatzko/SlimMicroService/blob/master/src/app/Validation/Rule/DateTime.php
         if('datetime' === $type && FALSE === empty($value)){
             $value = \DateTime::createFromFormat(\DateTime::ATOM, $value);
         }
