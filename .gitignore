@@ -5,6 +5,4 @@
 /src/vendor/
 !/src/vendor/.gitkeep
 
-/src/app/Entity/Doctrine
-
 /composer.lock
