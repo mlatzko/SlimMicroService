@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2015 at 12:46 AM
+-- Generation Time: Nov 26, 2015 at 12:11 AM
 -- Server version: 5.5.46-0ubuntu0.14.04.2
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -23,15 +23,17 @@ USE `slim_micro_service`;
 -- Table structure for table `example`
 --
 
-DROP TABLE IF EXISTS `example`;
-CREATE TABLE `example` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` enum('A','B') NOT NULL DEFAULT 'A',
-  `is_active` tinyint(1) NOT NULL DEFAULT '0',
-  `name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS `example` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Primary identfier.',
+  `type` varchar(55) NOT NULL COMMENT 'Type of user.',
+  `is_active` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Is user is active or not.',
+  `alias` varchar(55) DEFAULT NULL,
+  `name` varchar(255) NOT NULL COMMENT 'Name of an user.',
+  `email` varchar(255) NOT NULL COMMENT 'Email address of an user.',
+  `age` int(3) NOT NULL COMMENT 'Age of an user.',
+  `created` datetime DEFAULT NULL COMMENT 'Date entry the db entry was created by a user.',
+  `modified` datetime DEFAULT NULL COMMENT 'Date entry the db entry was last modified by a user.',
+  PRIMARY KEY (`id`),
+  KEY `type` (`type`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 SET FOREIGN_KEY_CHECKS=1;
