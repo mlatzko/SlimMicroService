@@ -16,7 +16,7 @@ namespace SlimMicroService\Entity;
  *
  * @version 1.0.0-RC-1
  */
-class Example
+class DoctrineDefault
 {
     /**
      * Set created & modified to now.

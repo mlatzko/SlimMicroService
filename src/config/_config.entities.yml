@@ -12,4 +12,4 @@ entities:
         adapter: doctrine
         table: example
         classname: Example
-        extends: \SlimMicroService\Entity\Example
+        extends: \SlimMicroService\Entity\DoctrineDefault

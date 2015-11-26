@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="example")
  * @ORM\Entity
  */
-class Example extends \SlimMicroService\Entity\Example
+class Example extends \SlimMicroService\Entity\DoctrineDefault
 {
     /**
      * @var integer
