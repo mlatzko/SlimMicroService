@@ -12,7 +12,7 @@ namespace SlimMicroService\Action;
 use \SlimMicroService\Action;
 
 /**
- * Behavior of reading a resource.
+ * Behavior of reading a resources.
  *
  * @author Mathias Latzko <mathias.latzko@gmail.com>
  *
@@ -39,7 +39,7 @@ class Discover extends Action
         $responseData = array(
             'status'  => 'ok',
             'content' => $uris,
-            'params' => array(
+            'params'  => array(
                 'filter'  => $filter,
                 'orderBy' => $orderBy,
                 'offset'  => $offset,
@@ -52,6 +52,13 @@ class Discover extends Action
             ->withJson($responseData, 200);
     }
 
+    /**
+     * Only apply filters on existing fields.
+     *
+     * @param array $params Request GET parameter.
+     *
+     * @return array
+     */
     private function getFilter(array $params)
     {
         $fieldsNames = $this->adapter->getFieldNames();
@@ -66,6 +73,13 @@ class Discover extends Action
         return $filter;
     }
 
+    /**
+     * Get order by.
+     *
+     * @param array $params Request GET parameter.
+     *
+     * @return array
+     */
     private function getOrderBy(array $params)
     {
         if(TRUE === isset($params['orderBy'])){
@@ -81,6 +95,29 @@ class Discover extends Action
         return array();
     }
 
+    /**
+     * Get offset.
+     *
+     * @param array $params Request GET parameter.
+     *
+     * @return integer
+     */
+    private function getOffset(array $params)
+    {
+        if(TRUE === isset($params['offset']) && TRUE === is_numeric($params['offset'])){
+            return (integer) $params['offset'];
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get limit.
+     *
+     * @param array $params Request GET parameter.
+     *
+     * @return integer
+     */
     private function getLimit(array $params)
     {
         if(TRUE === isset($params['limit']) && TRUE === is_numeric($params['limit'])){
@@ -90,12 +127,5 @@ class Discover extends Action
         return 25;
     }
 
-    private function getOffset(array $params)
-    {
-        if(TRUE === isset($params['offset']) && TRUE === is_numeric($params['offset'])){
-            return (integer) $params['offset'];
-        }
 
-        return 0;
-    }
 }

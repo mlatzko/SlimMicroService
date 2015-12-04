@@ -136,6 +136,17 @@ class Doctrine extends Adapter
         return (NULL === $entity) ? NULL : $this->serializer->toArray($entity, $routeName) ;
     }
 
+    /**
+     * Load resources.
+     *
+     * @param string $routeName
+     * @param array $filter
+     * @param array $orderBy
+     * @param integer $limit
+     * @param integer $offset
+     *
+     * @return array A URI list of resources.
+     */
     public function discover($routeName, array $filter, array $orderBy, $limit, $offset)
     {
         $uriList  = array();
@@ -151,6 +162,13 @@ class Doctrine extends Adapter
         return $uriList;
     }
 
+    /**
+     * Return count of rows.
+     *
+     * @param array $filter
+     *
+     * @return integer
+     */
     public function count(array $filter)
     {
         $entities = $this->entityManager
