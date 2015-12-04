@@ -136,6 +136,30 @@ class Doctrine extends Adapter
         return (NULL === $entity) ? NULL : $this->serializer->toArray($entity, $routeName) ;
     }
 
+    public function discover($routeName, array $filter, array $orderBy, $limit, $offset)
+    {
+        $uriList  = array();
+        $entities = $this->entityManager
+                            ->getRepository(get_class($this->entity))
+                            ->findBy($filter, $orderBy, $limit, $offset);
+
+        foreach ($entities as $entity) {
+            $uri       = $this->serializer->toURI($entity, $routeName);
+            $uriList[] = $uri;
+        }
+
+        return $uriList;
+    }
+
+    public function count(array $filter)
+    {
+        $entities = $this->entityManager
+                            ->getRepository(get_class($this->entity))
+                            ->findBy($filter);
+
+        return count($entities);
+    }
+
     /**
      * Read resource.
      */
@@ -187,5 +211,17 @@ class Doctrine extends Adapter
         $rules = $this->parser->parse();
 
         return $rules;
+    }
+
+    public function getFieldNames()
+    {
+        $schema = $this->entityManager->getClassMetadata(get_class($this->entity))->fieldMappings;
+        $names  = array();
+
+        foreach ($schema as $value) {
+            $names[] = $value['fieldName'];
+        }
+
+        return $names;
     }
 }

@@ -84,7 +84,7 @@ class DoctrineEntitySerializer
 
         foreach ($fields as $name) {
             if($primary === $name){
-                $data['uri'] = '/' . $routeName. '/' . $this->getPropertyValue($entity, $name);
+                $data['uri'] = $this->toURI($entity, $routeName);
                 continue;
             }
 
@@ -92,6 +92,25 @@ class DoctrineEntitySerializer
         }
 
         return $data;
+    }
+
+    /**
+     * Return URI for entity.
+     *
+     * @param object $entity
+     * @param string $routeName
+     *
+     * @return string
+     */
+    public function toURI($entity, $routeName)
+    {
+        $metadata    = $this->entityManager->getClassMetadata(get_class($entity));
+        $identifiers = $metadata->identifier;
+        $primary     = current($identifiers);
+
+        $value = $this->getPropertyValue($entity, $primary);
+
+        return '/' . $routeName . '/' . $value;
     }
 
     /**
