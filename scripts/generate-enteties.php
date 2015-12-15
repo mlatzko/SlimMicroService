@@ -94,7 +94,7 @@ foreach ($entities as $key => $entity) {
     $extends   = $config->get('entities.' . $key . '.extends');
 
     // Generate file content via Doctrine.
-    $metadata = $factory->getMetadataFor($namespace . ucfirst($table));
+    $metadata = $factory->getMetadataFor($classname);
 
     $metadata->table = array('name' => $table);
     $metadata->name  = $classname;
