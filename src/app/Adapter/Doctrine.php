@@ -171,11 +171,28 @@ class Doctrine extends Adapter
      */
     public function count(array $filter)
     {
-        $entities = $this->entityManager
-                            ->getRepository(get_class($this->entity))
-                            ->findBy($filter);
+        $parameterCount   = 0;
+        $primaryFieldName = $this->entityManager->getClassMetadata(get_class($this->entity))->getSingleIdentifierFieldName();
+        $repository       = $this->entityManager->getRepository(get_class($this->entity));
+        $queryBuilder     = $repository->createQueryBuilder('t');
 
-        return count($entities);
+        $queryBuilder->select('COUNT(t.' . $primaryFieldName . ')');
+
+        foreach ($filter as $fieldName => $value) {
+            if(0 === $parameterCount){
+                $queryBuilder->where('t.'. $fieldName . ' = ?' . $parameterCount);
+            } else {
+                $queryBuilder->orWhere('t.'. $fieldName . ' = ?' . $parameterCount);
+            }
+
+            $queryBuilder->setParameter($parameterCount, $value);
+            $parameterCount =+ 1;
+        }
+
+        $query = $queryBuilder->getQuery();
+        $count = $query->getSingleScalarResult();
+
+        return (integer)$count;
     }
 
     /**
